@@ -78,40 +78,43 @@ always@(*)
 									begin
 										if (equal_bid_bit)
 														casez(last_serviced)
-																Mast0 	: 	casez( {equal_bid[3],equal_bid[2],equal_bid[1],equal_bid[0]} )		// 3 2 1 0 										
+																Mast0 	: 	casez( {equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2], equal_bid[1]&valid_balance[1], equal_bid[0]&valid_balance[0]} )		// 3 2 1 0 										
 																					4'b0011	:	result <= Mast1 ;  
 																					4'b0101	:	result <= Mast2 ;
 																					4'b0111	:	result <= Mast1 ;
 																					4'b1001	:	result <= Mast3 ;
 																					4'b1011	:	result <= Mast1 ;
 																					4'b1101	:	result <= Mast2 ;
-																					4'b1111	:	result <= Mast3 ;																
+																					4'b1111	:	result <= Mast3 ;
+																					4'b???0	:	result <= Mast1 ;	 // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
 																					default	: 	result <= 'b1;		// ERROR CASE 
 																			endcase
 																			
-																Mast1 	: 	casez( {equal_bid[0],equal_bid[3],equal_bid[2],equal_bid[1]} )		// 0 3 2 1 	
+																Mast1 	: 	casez( {equal_bid[0]&valid_balance[0], equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2], equal_bid[1]&valid_balance[1]} )		// 0 3 2 1 	
 																					4'b0011	:	result <= Mast1 ;  
 																					4'b0101	:	result <= Mast2 ;
 																					4'b0111	:	result <= Mast1 ;
 																					4'b1001	:	result <= Mast3 ;
 																					4'b1011	:	result <= Mast1 ;
 																					4'b1101	:	result <= Mast2 ;
-																					4'b1111	:	result <= Mast3 ;																
+																					4'b1111	:	result <= Mast3 ;			
+																					4'b???0	:	result <= Mast0 ;	 // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   																					
 																					default	: 	result <= 'b1;		// ERROR CASE 
 																			endcase
 
-																Mast2 	: 	casez( {equal_bid[1],equal_bid[0],equal_bid[3],equal_bid[2]} )		// 1 0 3 2 
+																Mast2 	: 	casez( {equal_bid[1]&valid_balance[1], equal_bid[0]&valid_balance[0], equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2]} )		// 1 0 3 2 
 																					4'b0011	:	result <= Mast1 ;  
 																					4'b0101	:	result <= Mast2 ;
 																					4'b0111	:	result <= Mast1 ;
 																					4'b1001	:	result <= Mast3 ;
 																					4'b1011	:	result <= Mast1 ;
 																					4'b1101	:	result <= Mast2 ;
-																					4'b1111	:	result <= Mast3 ;																
+																					4'b1111	:	result <= Mast3 ;
+																					4'b???0	:	result <= Mast0 ;	 // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   																																										
 																					default	: 	result <= 'b1;		// ERROR CASE 
 																			endcase
 																			
-																Mast3 	: 	casez( {equal_bid[2],equal_bid[0],equal_bid[1],equal_bid[3]} )		// 2 0 1 3 										
+																Mast3 	: 	casez( {equal_bid[2]&valid_balance[2], equal_bid[0]&valid_balance[0], equal_bid[1]&valid_balance[1], equal_bid[3]&valid_balance[3]} )		// 2 0 1 3 										
 																					4'b0011	:	result <= Mast1 ;  
 																					4'b0101	:	result <= Mast2 ;
 																					4'b0111	:	result <= Mast1 ;
@@ -119,6 +122,7 @@ always@(*)
 																					4'b1011	:	result <= Mast1 ;
 																					4'b1101	:	result <= Mast2 ;
 																					4'b1111	:	result <= Mast3 ;																
+																					4'b???0	:	result <= Mast0 ;	 // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   																																										
 																					default	: 	result <= 'b1;		// ERROR CASE 
 																			endcase
 																default : result <= 'b1;		// ERROR CASE 
@@ -186,10 +190,10 @@ always@(posedge clk or posedge rst)
 			begin
 					last_serviced <= result;										// flopping to store which master was last serviced 
 					
-					count_60[0] <= (result[0]) ? 'b0 : (count_60[0] +1);			// start counter to avoid 60 cycle no service error 
-					count_60[1] <= (result[1]) ? 'b0 : (count_60[1] +1);		
-					count_60[2] <= (result[2]) ? 'b0 : (count_60[2] +1);		
-					count_60[3] <= (result[3]) ? 'b0 : (count_60[3] +1);						
+					count_60[0] <= ((result[0]) | (bid[0] == 'b0) ) ? 'b0 : (count_60[0] +1);			// start counter to avoid 60 cycle no service error , start it even if no bid by master 
+					count_60[1] <= ((result[1]) | (bid[1] == 'b0) ) ? 'b0 : (count_60[1] +1);		
+					count_60[2] <= ((result[2]) | (bid[2] == 'b0) ) ? 'b0 : (count_60[2] +1);		
+					count_60[3] <= ((result[3]) | (bid[3] == 'b0) ) ? 'b0 : (count_60[3] +1);						
 					
 					serve_60[0] <= (count_60[0] == 6'd60) ? 'b1 : 'b0; 				// Flag to indicate which master to serve to avoid 60 cycle no service error 
 					serve_60[1] <= (count_60[1] == 6'd60) ? 'b1 : 'b0; 					
