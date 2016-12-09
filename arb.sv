@@ -38,7 +38,11 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
                             end
                 4'b0010    :     begin
                                 case (m1.addr)
-                                        4'h0    :     begin s0.RW    =  m1.RW;    s0.addr = m1.addr;    s0.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s0.DataFromSlave;     s0.sel    = 'b1;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                4'h1    :     begin s1.RW    =  m1.RW;    s1.addr = m1.addr;    s1.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s1.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b1;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                4'h2    :     begin s2.RW    =  m1.RW;    s2.addr = m1.addr;    s2.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s2.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b1;    s3.sel    = 'b0;    end                4'h3    :     begin s3.RW    =  m1.RW;    s3.addr = m1.addr;    s3.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s3.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b1;    end                default    :      begin s0.sel = 'b0;        s1.sel  = 'b0;        s2.sel = 'b0;        s3.sel = 'b0;    end                                    
+                                        4'h0    :     begin s0.RW    =  m1.RW;    s0.addr = m1.addr;    s0.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s0.DataFromSlave;     s0.sel    = 'b1;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                
+                                        4'h1    :     begin s1.RW    =  m1.RW;    s1.addr = m1.addr;    s1.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s1.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b1;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                
+                                        4'h2    :     begin s2.RW    =  m1.RW;    s2.addr = m1.addr;    s2.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s2.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b1;    s3.sel    = 'b0;    end                
+                                        4'h3    :     begin s3.RW    =  m1.RW;    s3.addr = m1.addr;    s3.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s3.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b1;    end                
+                                        default    :      begin s0.sel = 'b0;        s1.sel  = 'b0;        s2.sel = 'b0;        s3.sel = 'b0;    end                                    
                                 endcase
                             end
                 4'b0100    :     begin
@@ -153,10 +157,10 @@ always@(*)
                                 else
                                     begin
                                             
-                                                     if ( ( /* valid_balance[0] == 1)  && */ ( highest_bid == Mast0) ) result <= Mast0 ;    // If Master0 has valid balance and highest bid , grant bus to Master0
-                                                else if ( ( /* valid_balance[1] == 1)  && */ ( highest_bid == Mast1) ) result <= Mast1 ;    // If Master1 has valid balance and highest bid , grant bus to Master1
-                                                else if ( ( /* valid_balance[2] == 1)  && */ ( highest_bid == Mast2) ) result <= Mast2 ;    // If Master2 has valid balance and highest bid , grant bus to Master2
-                                                else if ( ( /* valid_balance[3] == 1)  && */ ( highest_bid == Mast3) ) result <= Mast3 ;    // If Master3 has valid balance and highest bid , grant bus to Master3
+                                                     if ( ( /* valid_balance[0] == 1)  && */ ( highest_bid == Mast0) )) result <= Mast0 ;    // If Master0 has valid balance and highest bid , grant bus to Master0
+                                                else if ( ( /* valid_balance[1] == 1)  && */ ( highest_bid == Mast1) )) result <= Mast1 ;    // If Master1 has valid balance and highest bid , grant bus to Master1
+                                                else if ( ( /* valid_balance[2] == 1)  && */ ( highest_bid == Mast2) )) result <= Mast2 ;    // If Master2 has valid balance and highest bid , grant bus to Master2
+                                                else if ( ( /* valid_balance[3] == 1)  && */ ( highest_bid == Mast3) )) result <= Mast3 ;    // If Master3 has valid balance and highest bid , grant bus to Master3
                                                 else     
                                                     begin
                                                         if (equal_bid_bit)
@@ -227,7 +231,9 @@ always@(*)
     end
                     
 // #################################################
-always@(*) 
+//always@(*) 
+always@(posedge clk or posedge rst)
+
     begin
         if (rst)
             begin
@@ -292,7 +298,7 @@ always@(*)
     end
     
 // #################################################
-always@(negedge clk or posedge rst)
+always@(posedge clk or posedge rst)
     begin
         if (rst)
             begin
@@ -342,16 +348,16 @@ module count (     input clk, rst,
                 
 reg [9:0] counter; 
 
-always@(negedge clk, posedge rst)
+always@(posedge clk, posedge rst)
     begin    
         if (rst)
             begin
                 balance = 750;  
-                counter <= 'b0;                
+                counter <=  'b0;                
             end
         else
             begin
-                counter <= (counter == 400) ? 'b0 : (counter +1);           // free running counter resets automatically  every 400 counts  
+                counter <= (counter == 400) ? 'b0 :  (counter +1);           // free running counter resets automatically  every 400 counts  
                 
                 if (counter == 400)            balance = (balance > 150) ? 900 : (balance + 750);       // Adds previous balance & takes care of limits 
                 else
