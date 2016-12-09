@@ -231,36 +231,34 @@ always@(*)
     end
                     
 // #################################################
-//always@(*) 
-always@(posedge clk or posedge rst)
-
+always@(*) 
     begin
         if (rst)
             begin
-                highest_bid 	= 'b0;
-				highest_bid_en	= 'b0;
-                equal_bid    	= 'b0;
-                valid_balance   = 'b0;
+                highest_bid 	<= 'b0;
+				highest_bid_en	<= 'b0;
+                equal_bid    	<= 'b0;
+                valid_balance   <= 'b0;
 
-				bid_reg_0		= 'b0;
-				bid_reg_1		= 'b0;
-				bid_reg_2		= 'b0;
-				bid_reg_3		= 'b0;				
+				bid_reg_0		<= 'b0;
+				bid_reg_1		<= 'b0;
+				bid_reg_2		<= 'b0;
+				bid_reg_3		<= 'b0;				
 				
             end
         else
             begin      
 						
-						bid_reg_0 		= bid_0;		// copy bid values 
-						bid_reg_1 		= bid_1;
-						bid_reg_2 		= bid_2;
-						bid_reg_3		= bid_3;			
+						bid_reg_0 		<=  bid_0;		// copy bid values 
+						bid_reg_1 		<=  bid_1;
+						bid_reg_2 		<=  bid_2;
+						bid_reg_3		<=  bid_3;			
 
 						
-						highest_bid_en[0] = (bid[0] == 0) ? 'b0 : (valid_balance[0]==0) ? 'b0 : 'b1; 	// Ensures bid is valid and is not 0  
-						highest_bid_en[1] = (bid[1] == 0) ? 'b0 : (valid_balance[1]==0) ? 'b0 : 'b1;
-						highest_bid_en[2] = (bid[2] == 0) ? 'b0 : (valid_balance[2]==0) ? 'b0 : 'b1;
-						highest_bid_en[3] = (bid[3] == 0) ? 'b0 : (valid_balance[3]==0) ? 'b0 : 'b1;
+						highest_bid_en[0] <=  (bid[0] == 0) ? 'b0 : (valid_balance[0]==0) ? 'b0 : 'b1; 	// Ensures bid is valid and is not 0  
+						highest_bid_en[1] <=  (bid[1] == 0) ? 'b0 : (valid_balance[1]==0) ? 'b0 : 'b1;
+						highest_bid_en[2] <=  (bid[2] == 0) ? 'b0 : (valid_balance[2]==0) ? 'b0 : 'b1;
+						highest_bid_en[3] <=  (bid[3] == 0) ? 'b0 : (valid_balance[3]==0) ? 'b0 : 'b1;
 						
 						
 //                                               if ((bid[0] > bid[1]) && (bid[0] > bid[2]) && (bid[0] > bid[3])  )      highest_bid[0] <= 'b1;    else    highest_bid[0] <= 'b0;
@@ -268,31 +266,31 @@ always@(posedge clk or posedge rst)
 //                                               if ((bid[2] > bid[0]) && (bid[2] > bid[1]) && (bid[2] > bid[3])  )      highest_bid[2] <= 'b1;    else    highest_bid[2] <= 'b0;
 //                                               if ((bid[3] > bid[0]) && (bid[3] > bid[1]) && (bid[3] > bid[2])  )      highest_bid[3] <= 'b1;    else    highest_bid[3] <= 'b0;
 
-							bid_reg_0  = (valid_balance[0]) ? bid[0] : 'b0 ;		//  replaces bid value with 0 if balance does not exist 
-							bid_reg_1  = (valid_balance[1]) ? bid[1] : 'b0 ;
-							bid_reg_2  = (valid_balance[2]) ? bid[2] : 'b0 ;
-							bid_reg_3  = (valid_balance[3]) ? bid[3] : 'b0 ;
+							bid_reg_0  <=  (valid_balance[0]) ? bid[0] : 'b0 ;		//  replaces bid value with 0 if balance does not exist 
+							bid_reg_1  <=  (valid_balance[1]) ? bid[1] : 'b0 ;
+							bid_reg_2  <=  (valid_balance[2]) ? bid[2] : 'b0 ;
+							bid_reg_3  <=  (valid_balance[3]) ? bid[3] : 'b0 ;
 							
                                 
                         
-                            if(highest_bid_en[0]) if     ((bid_reg_0  > bid_reg_1 ) && (bid_reg_0  > bid_reg_2 ) && (bid_reg_0  > bid_reg_3 )  )      highest_bid[0] <= 'b1;    else    highest_bid[0] <= 'b0;  else highest_bid[0] <= 'b0;
-                            if(highest_bid_en[1]) if     ((bid_reg_1  > bid_reg_0 ) && (bid_reg_1  > bid_reg_2 ) && (bid_reg_1  > bid_reg_3 )  )      highest_bid[1] <= 'b1;    else    highest_bid[1] <= 'b0;  else highest_bid[1] <= 'b0;
-                            if(highest_bid_en[2]) if     ((bid_reg_2  > bid_reg_0 ) && (bid_reg_2  > bid_reg_1 ) && (bid_reg_2  > bid_reg_3 )  )      highest_bid[2] <= 'b1;    else    highest_bid[2] <= 'b0;  else highest_bid[2] <= 'b0;
-                            if(highest_bid_en[3]) if     ((bid_reg_3  > bid_reg_0 ) && (bid_reg_3  > bid_reg_1 ) && (bid_reg_3  > bid_reg_2 )  )      highest_bid[3] <= 'b1;    else    highest_bid[3] <= 'b0;  else highest_bid[3] <= 'b0;
+                            if(highest_bid_en[0]) if     ((bid_reg_0  > bid_reg_1 ) && (bid_reg_0  > bid_reg_2 ) && (bid_reg_0  > bid_reg_3 )  )      highest_bid[0] <=  'b1;    else    highest_bid[0] <=  'b0;  else highest_bid[0] <=  'b0;
+                            if(highest_bid_en[1]) if     ((bid_reg_1  > bid_reg_0 ) && (bid_reg_1  > bid_reg_2 ) && (bid_reg_1  > bid_reg_3 )  )      highest_bid[1] <=  'b1;    else    highest_bid[1] <=  'b0;  else highest_bid[1] <=  'b0;
+                            if(highest_bid_en[2]) if     ((bid_reg_2  > bid_reg_0 ) && (bid_reg_2  > bid_reg_1 ) && (bid_reg_2  > bid_reg_3 )  )      highest_bid[2] <=  'b1;    else    highest_bid[2] <=  'b0;  else highest_bid[2] <=  'b0;
+                            if(highest_bid_en[3]) if     ((bid_reg_3  > bid_reg_0 ) && (bid_reg_3  > bid_reg_1 ) && (bid_reg_3  > bid_reg_2 )  )      highest_bid[3] <=  'b1;    else    highest_bid[3] <=  'b0;  else highest_bid[3] <=  'b0;
                             
 //                                                if     ((bid[1] > bid[0]) && (bid[1] > bid[2]) && (bid[1] > bid[3])  )      highest_bid[1] <= 'b1;    else    highest_bid[1] <= 'b0;      
 //                                                if     ((bid[2] > bid[0]) && (bid[2] > bid[1]) && (bid[2] > bid[3])  )      highest_bid[2] <= 'b1;    else    highest_bid[2] <= 'b0;    
 //                                                if     ((bid[3] > bid[0]) && (bid[3] > bid[1]) && (bid[3] > bid[2])  )      highest_bid[3] <= 'b1;    else    highest_bid[3] <= 'b0;  
 
-                            if     (( bid_reg_0  == bid_reg_1  ) | ( bid_reg_0  == bid_reg_2  ) | ( bid_reg_0  == bid_reg_3  )  )     equal_bid[0] <= 'b1;    else    equal_bid[0] <= 'b0; 
-                            if     (( bid_reg_1  == bid_reg_0  ) | ( bid_reg_1  == bid_reg_2  ) | ( bid_reg_1  == bid_reg_3  )  )     equal_bid[1] <= 'b1;    else    equal_bid[1] <= 'b0;  
-                            if     (( bid_reg_2  == bid_reg_0  ) | ( bid_reg_2  == bid_reg_1  ) | ( bid_reg_2  == bid_reg_3  )  )     equal_bid[2] <= 'b1;    else    equal_bid[2] <= 'b0;  
-                            if     (( bid_reg_3  == bid_reg_0  ) | ( bid_reg_3  == bid_reg_1  ) | ( bid_reg_3  == bid_reg_2  )  )     equal_bid[3] <= 'b1;    else    equal_bid[3] <= 'b0;  
+                            if     (( bid_reg_0  == bid_reg_1  ) | ( bid_reg_0  == bid_reg_2  ) | ( bid_reg_0  == bid_reg_3  )  )     equal_bid[0] <=  'b1;    else    equal_bid[0] <=  'b0; 
+                            if     (( bid_reg_1  == bid_reg_0  ) | ( bid_reg_1  == bid_reg_2  ) | ( bid_reg_1  == bid_reg_3  )  )     equal_bid[1] <=  'b1;    else    equal_bid[1] <=  'b0;  
+                            if     (( bid_reg_2  == bid_reg_0  ) | ( bid_reg_2  == bid_reg_1  ) | ( bid_reg_2  == bid_reg_3  )  )     equal_bid[2] <=  'b1;    else    equal_bid[2] <=  'b0;  
+                            if     (( bid_reg_3  == bid_reg_0  ) | ( bid_reg_3  == bid_reg_1  ) | ( bid_reg_3  == bid_reg_2  )  )     equal_bid[3] <=  'b1;    else    equal_bid[3] <=  'b0;  
                             
-                            if         (balance[0] >= bid[0])  valid_balance[0] <= 'b1; 	else  valid_balance[0] <= 'b0;
-                            if         (balance[1] >= bid[1])  valid_balance[1] <= 'b1; 	else  valid_balance[1] <= 'b0;
-                            if         (balance[2] >= bid[2])  valid_balance[2] <= 'b1; 	else  valid_balance[2] <= 'b0;
-                            if         (balance[3] >= bid[3])  valid_balance[3] <= 'b1; 	else  valid_balance[3] <= 'b0;
+                            if         (balance[0] >= bid[0])  valid_balance[0] <=  'b1; 	else  valid_balance[0] <=  'b0;
+                            if         (balance[1] >= bid[1])  valid_balance[1] <=  'b1; 	else  valid_balance[1] <=  'b0;
+                            if         (balance[2] >= bid[2])  valid_balance[2] <=  'b1; 	else  valid_balance[2] <=  'b0;
+                            if         (balance[3] >= bid[3])  valid_balance[3] <=  'b1; 	else  valid_balance[3] <=  'b0;
                                                         
 			end            
     end
@@ -302,26 +300,26 @@ always@(posedge clk or posedge rst)
     begin
         if (rst)
             begin
-                count_60[0] <= 'b0;    
-                count_60[1] <= 'b0;    
-                count_60[2] <= 'b0;    
-                count_60[3] <= 'b0;    
-                serve_60    <= 'b0;
-                last_serviced    <= 'b0;
+                count_60[0] <=  'b0;    
+                count_60[1] <=  'b0;    
+                count_60[2] <=  'b0;    
+                count_60[3] <=  'b0;    
+                serve_60    <=  'b0;
+                last_serviced    <=  'b0;
             end
         else
             begin
-                    last_serviced <= result;                                        // flopping to store which master was last serviced 
+                    last_serviced <=  result;                                        // flopping to store which master was last serviced 
                     
-                    count_60[0] <= ((result[0]) | (bid[0] == 'b0) ) ? 'b0 : (count_60[0] +1);            // start counter to avoid 60 cycle no service error , start it even if no bid by master 
-                    count_60[1] <= ((result[1]) | (bid[1] == 'b0) ) ? 'b0 : (count_60[1] +1);        
-                    count_60[2] <= ((result[2]) | (bid[2] == 'b0) ) ? 'b0 : (count_60[2] +1);        
-                    count_60[3] <= ((result[3]) | (bid[3] == 'b0) ) ? 'b0 : (count_60[3] +1);                        
+                    count_60[0] <=  ((result[0]) | (bid[0] == 'b0) ) ? 'b0 : (count_60[0] +1);            // start counter to avoid 60 cycle no service error , start it even if no bid by master 
+                    count_60[1] <=  ((result[1]) | (bid[1] == 'b0) ) ? 'b0 : (count_60[1] +1);        
+                    count_60[2] <=  ((result[2]) | (bid[2] == 'b0) ) ? 'b0 : (count_60[2] +1);        
+                    count_60[3] <=  ((result[3]) | (bid[3] == 'b0) ) ? 'b0 : (count_60[3] +1);                        
                     
-                    serve_60[0] <= (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
-                    serve_60[1] <= (count_60[1] == 6'd58) ? 'b1 : 'b0;                     
-                    serve_60[2] <= (count_60[2] == 6'd58) ? 'b1 : 'b0;                                     
-                    serve_60[3] <= (count_60[3] == 6'd58) ? 'b1 : 'b0;                                                         
+                    serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
+                    serve_60[1] <=  (count_60[1] == 6'd58) ? 'b1 : 'b0;                     
+                    serve_60[2] <=  (count_60[2] == 6'd58) ? 'b1 : 'b0;                                     
+                    serve_60[3] <=  (count_60[3] == 6'd58) ? 'b1 : 'b0;                                                         
             end
     end    
 // #################################################    
@@ -352,17 +350,17 @@ always@(posedge clk, posedge rst)
     begin    
         if (rst)
             begin
-                balance = 750;  
+                balance <= 750;  
                 counter <=  'b0;                
             end
         else
             begin
                 counter <= (counter == 400) ? 'b0 :  (counter +1);           // free running counter resets automatically  every 400 counts  
                 
-                if (counter == 400)            balance = (balance > 150) ? 900 : (balance + 750);       // Adds previous balance & takes care of limits 
+                if (counter == 400)            balance <= (balance > 150) ? 900 : (balance + 750);       // Adds previous balance & takes care of limits 
                 else
-                    if (granted)    if (balance <= 0)    balance = 1; else balance = (balance == 1)? 1: (((balance - bid) == 0) ?  1 : (balance - bid));      // reduces bid amount to maintain bank balance 
-                    else            balance = balance;          
+                    if (granted )    if (balance <= 0)    balance <= 1; else balance <= (balance == 1)? 1: (((balance - bid) == 0) ?  1 : (balance - bid));      // reduces bid amount to maintain bank balance 
+                    else            balance <= balance;          
             end
     end
 
