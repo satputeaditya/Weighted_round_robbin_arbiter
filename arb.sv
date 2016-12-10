@@ -68,10 +68,10 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'h00000000 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&     m0.DataToSlave == 32'h300006A0 &&       bid[0] == 4'hF   && bid[1]== 4'h0 && bid[2] == 4'hF && bid[3] == 4'hF)        debug1[30 ] <=  'b1; else debug1[30 ] <= 'b0;                        
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h200006B7 &&       bid[0] == 4'hF   && bid[1]== 4'h5 && bid[2] == 4'h9 && bid[3] == 4'h9)        debug1[31 ] <=  'b1; else debug1[31 ] <= 'b0;                        
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h200006B9 &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'h9 && bid[3] == 4'h9)        debug1[32 ] <=  'b1; else debug1[32 ] <= 'b0;                        
-
             if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'hA56E844A &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'hE && bid[3] == 4'hE)        debug1[33 ] <=  'b1; else debug1[33 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[34 ] <=  'b1; else debug1[34 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[35 ] <=  'b1; else debug1[35 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h4BABAD97 &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'hB && bid[3] == 4'hB)        debug1[34 ] <=  'b1; else debug1[34 ] <= 'b0;                        
+
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'hA54B804A &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'hF && bid[3] == 4'hF)        debug1[35 ] <=  'b1; else debug1[35 ] <= 'b0;                        
 //            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[36 ] <=  'b1; else debug1[36 ] <= 'b0;                        
 //            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[37 ] <=  'b1; else debug1[37 ] <= 'b0;                        
 
@@ -82,7 +82,7 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
     
 assign serve_0 = 0;
 assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[24]  | debug1[26]  | debug1[28]  | debug1[31]    | debug1[28]  | debug1[28] );
-assign serve_2 = (debug1[1] | debug1[16] | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
+assign serve_2 = (debug1[1] | debug1[16] | debug1[34]  | debug1[35]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
 assign serve_3 = (debug1[2] | debug1[3]| debug1[4]| debug1[6]| debug1[5]| debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]      | debug1[25]  | debug1[27]  | debug1[29]  | debug1[30]  | debug1[32]  | debug1[33] );
 
 
