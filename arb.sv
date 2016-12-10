@@ -19,34 +19,37 @@ module arb (
 logic [3:0] master_grant; 
 logic [9:0] balance [3:0];
 logic [3:0] bid [3:0];
+logic [31:0] debug1;
 
 assign {m3.grant, m2.grant, m1.grant, m0.grant}  = master_grant;
 assign {bid[3]  , bid[2]  , bid[1]  , bid[0]  }  = {m3.req, m2.req, m1.req, m0.req};
 
 
+
 always@(*)          // ADDRESS DECODING & CONNECTIONS 
         begin
-            casez (master_grant)
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'h00000000 &&  bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[0] <=  'b1; else debug1[0] <= 'b0;
+            case (master_grant)
                 4'b0001    :     begin
                                 case (m0.addr[15:12])
                                         4'h0    :     begin s0.RW    =  m0.RW;    s0.addr = m0.addr;    s0.DataToSlave     =  m0.DataToSlave; m0.DataFromSlave =  s0.DataFromSlave;     s0.sel    = 'b1;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                
                                         4'h1    :     begin s1.RW    =  m0.RW;    s1.addr = m0.addr;    s1.DataToSlave     =  m0.DataToSlave; m0.DataFromSlave =  s1.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b1;    s2.sel    = 'b0;    s3.sel    = 'b0;    end            
                                         4'h2    :     begin s2.RW    =  m0.RW;    s2.addr = m0.addr;    s2.DataToSlave     =  m0.DataToSlave; m0.DataFromSlave =  s2.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b1;    s3.sel    = 'b0;    end            
                                         4'h3    :     begin s3.RW    =  m0.RW;    s3.addr = m0.addr;    s3.DataToSlave     =  m0.DataToSlave; m0.DataFromSlave =  s3.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b1;    end            
-                                        default    :      begin s0.sel = 'b0;        s1.sel  = 'b0;        s2.sel = 'b0;        s3.sel = 'b0;  end                            
+                                        default    :  begin s0.sel = 'b0;        s1.sel  = 'b0;        s2.sel = 'b0;        s3.sel = 'b0;  end                            
                                 endcase
                             end
                 4'b0010    :     begin
-                                case (m1.addr)
+                                case (m1.addr[15:12])
                                         4'h0    :     begin s0.RW    =  m1.RW;    s0.addr = m1.addr;    s0.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s0.DataFromSlave;     s0.sel    = 'b1;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                
                                         4'h1    :     begin s1.RW    =  m1.RW;    s1.addr = m1.addr;    s1.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s1.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b1;    s2.sel    = 'b0;    s3.sel    = 'b0;    end                
                                         4'h2    :     begin s2.RW    =  m1.RW;    s2.addr = m1.addr;    s2.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s2.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b1;    s3.sel    = 'b0;    end                
                                         4'h3    :     begin s3.RW    =  m1.RW;    s3.addr = m1.addr;    s3.DataToSlave     =  m1.DataToSlave; m1.DataFromSlave =  s3.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b1;    end                
-                                        default    :      begin s0.sel = 'b0;        s1.sel  = 'b0;        s2.sel = 'b0;        s3.sel = 'b0;    end                                    
+                                        default :     begin s0.sel = 'b0;        s1.sel  = 'b0;        s2.sel = 'b0;        s3.sel = 'b0;    end                                    
                                 endcase
                             end
                 4'b0100    :     begin
-                                case (m2.addr)
+                                case (m2.addr[15:12])
                                         4'h0    :     begin s0.RW    =  m2.RW;    s0.addr = m2.addr;    s0.DataToSlave     =  m2.DataToSlave; m2.DataFromSlave =  s0.DataFromSlave;     s0.sel    = 'b1;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b0;    end    
                                         4'h1    :     begin s1.RW    =  m2.RW;    s1.addr = m2.addr;    s1.DataToSlave     =  m2.DataToSlave; m2.DataFromSlave =  s1.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b1;    s2.sel    = 'b0;    s3.sel    = 'b0;    end    
                                         4'h2    :     begin s2.RW    =  m2.RW;    s2.addr = m2.addr;    s2.DataToSlave     =  m2.DataToSlave; m2.DataFromSlave =  s2.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b1;    s3.sel    = 'b0;    end    
@@ -55,7 +58,7 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
                                 endcase                
                             end
                 4'b1000    :     begin
-                                case (m3.addr)
+                                case (m3.addr[15:12])
                                         4'h0    :     begin s0.RW    =  m3.RW;    s0.addr = m3.addr;    s0.DataToSlave     =  m3.DataToSlave; m3.DataFromSlave =  s0.DataFromSlave;     s0.sel    = 'b1;    s1.sel    = 'b0;    s2.sel    = 'b0;    s3.sel    = 'b0;    end
                                         4'h1    :     begin s1.RW    =  m3.RW;    s1.addr = m3.addr;    s1.DataToSlave     =  m3.DataToSlave; m3.DataFromSlave =  s1.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b1;    s2.sel    = 'b0;    s3.sel    = 'b0;    end
                                         4'h2    :     begin s2.RW    =  m3.RW;    s2.addr = m3.addr;    s2.DataToSlave     =  m3.DataToSlave; m3.DataFromSlave =  s2.DataFromSlave;     s0.sel    = 'b0;    s1.sel    = 'b0;    s2.sel    = 'b1;    s3.sel    = 'b0;    end        
@@ -67,9 +70,9 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             endcase
         end
         
-        
 
-granting G1 ( m0.clk, m0.rst, bid[0], bid[1], bid[2], bid[3], master_grant);
+
+granting G1 ( m0.clk, m0.rst, bid[0], bid[1], bid[2], bid[3], debug1 ,master_grant );
 
 endmodule
 
@@ -84,6 +87,7 @@ module granting (
                     input  [3:0] bid_1,
                     input  [3:0] bid_2,
                     input  [3:0] bid_3,
+                    input  [31:0] debug,
                     
                     output [3:0] grant
                 );
@@ -124,7 +128,7 @@ wire serve_60_bit ;
 
 
 
-assign grant  = result;                // final 
+assign  grant  = result;                // final 
 
 assign bid[0] = bid_0;
 assign bid[1] = bid_1;
@@ -132,7 +136,9 @@ assign bid[2] = bid_2;
 assign bid[3] = bid_3;
 
 assign highest_bid_bit      = ( highest_bid == Mast0 	| highest_bid == Mast1  | highest_bid == Mast2 	| highest_bid == Mast3  ) ? 'b1 : 'b0 ;    	//     ensure only 1 highest bid exists 
-assign serve_60_bit      	= ( serve_60 == Mast0 		| serve_60 == Mast1 	| serve_60 == Mast2 	| serve_60 == Mast3 	) ? 'b1 : 'b0 ;    	//     serve_60_bit      = 1 if no service for 60 cycles  for EITHER ONE MASTER , CANNOT HANDLE 1+ MASTER   IT GETS COMPLICATED 
+
+assign serve_60_bit      	= ( serve_60[0]   |   serve_60[1]     | serve_60[2] 	| serve_60[3]    ) ;    	//     serve_60_bit      = 1 if no service for 60 cycles  for EITHER ONE MASTER , CANNOT HANDLE 1+ MASTER   IT GETS COMPLICATED 
+
 assign equal_bid_bit       	= ( equal_bid[0]     		| equal_bid[1]          | equal_bid[2]          | equal_bid[3]   );            				//     equal_bid_bit    = 1 if multiple equal bid exists
 
 // ################################################# 
@@ -152,7 +158,7 @@ always@(*)
                                             Mast1     : result <= Mast1;
                                             Mast2     : result <= Mast2;
                                             Mast3     : result <= Mast3;
-                                            default    : result <= 'b1;    // FAULTY CASE will NOT allow ANY master grant 
+                                            default    : result <= Mast2;    // FAULTY CASE will NOT allow ANY master grant 
                                         endcase
                                 else
                                     begin
@@ -161,7 +167,14 @@ always@(*)
                                                 else if ( ( /* valid_balance[1] == 1)  && */ ( highest_bid == Mast1) )) result <= Mast1 ;    // If Master1 has valid balance and highest bid , grant bus to Master1
                                                 else if ( ( /* valid_balance[2] == 1)  && */ ( highest_bid == Mast2) )) result <= Mast2 ;    // If Master2 has valid balance and highest bid , grant bus to Master2
                                                 else if ( ( /* valid_balance[3] == 1)  && */ ( highest_bid == Mast3) )) result <= Mast3 ;    // If Master3 has valid balance and highest bid , grant bus to Master3
-                                                else     
+                                                else if  (bid[0] == 'hF)
+                                                        begin
+                                                            if (bid[0] == 0) result[0] <= 'b0;  else if ((bid[0]  > bid[1] ) && (bid[0]  > bid[2] ) && (bid[0]  > bid[3] )  )   result <= Mast0;            
+                                                            if (bid[1] == 0) result[1] <= 'b0;  else if ((bid[1]  > bid[0] ) && (bid[1]  > bid[2] ) && (bid[1]  > bid[3] )  )   result <= Mast1;
+                                                            if (bid[2] == 0) result[2] <= 'b0;  else if ((bid[2]  > bid[0] ) && (bid[2]  > bid[1] ) && (bid[2]  > bid[3] )  )   result <= Mast2; 
+                                                            if (bid[3] == 0) result[3] <= 'b0;  else if ((bid[3]  > bid[0] ) && (bid[3]  > bid[1] ) && (bid[3]  > bid[2] )  )   result <= Mast3;                                                        
+                                                        end
+                                                else
                                                     begin
                                                         if (equal_bid_bit)
                                                                         casez(last_serviced)
@@ -185,7 +198,7 @@ always@(*)
                                                                                                     4'b1011    :    result <= Mast1 ;
                                                                                                     4'b1101    :    result <= Mast2 ;
                                                                                                     4'b1111    :    result <= Mast3 ;            
-                                                                                                    4'b???0    :    result <= Mast0 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                       
+                                                                                                    4'b???0    :    result <= Mast2 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                       
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
 
@@ -197,7 +210,7 @@ always@(*)
                                                                                                     4'b1011    :    result <= Mast1 ;
                                                                                                     4'b1101    :    result <= Mast2 ;
                                                                                                     4'b1111    :    result <= Mast3 ;
-                                                                                                    4'b???0    :    result <= Mast0 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
+                                                                                                    4'b???0    :    result <= Mast3 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
                                                                                             
@@ -206,13 +219,13 @@ always@(*)
                                                                                                     4'b0101    :    result <= Mast2 ;
                                                                                                     4'b0111    :    result <= Mast1 ;
                                                                                                     4'b1001    :    result <= Mast3 ;
-                                                                                                    4'b1011    :    result <= Mast1 ;
+                                                                                                    4'b1011    :    result <= #2 Mast1 ;
                                                                                                     4'b1101    :    result <= Mast2 ;
                                                                                                     4'b1111    :    result <= Mast3 ;                                                                
                                                                                                     4'b???0    :    result <= Mast0 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
-                                                                                default : result <= 'b1;        // ERROR CASE 
+                                                                                default : result <= 4'b1111;        // ERROR CASE 
                                                                         endcase
                                                         else
                                                                         begin
@@ -270,13 +283,37 @@ always@(*)
 							bid_reg_1  <=  (valid_balance[1]) ? bid[1] : 'b0 ;
 							bid_reg_2  <=  (valid_balance[2]) ? bid[2] : 'b0 ;
 							bid_reg_3  <=  (valid_balance[3]) ? bid[3] : 'b0 ;
-							
-                                
-                        
+
                             if(highest_bid_en[0]) if     ((bid_reg_0  > bid_reg_1 ) && (bid_reg_0  > bid_reg_2 ) && (bid_reg_0  > bid_reg_3 )  )      highest_bid[0] <=  'b1;    else    highest_bid[0] <=  'b0;  else highest_bid[0] <=  'b0;
                             if(highest_bid_en[1]) if     ((bid_reg_1  > bid_reg_0 ) && (bid_reg_1  > bid_reg_2 ) && (bid_reg_1  > bid_reg_3 )  )      highest_bid[1] <=  'b1;    else    highest_bid[1] <=  'b0;  else highest_bid[1] <=  'b0;
                             if(highest_bid_en[2]) if     ((bid_reg_2  > bid_reg_0 ) && (bid_reg_2  > bid_reg_1 ) && (bid_reg_2  > bid_reg_3 )  )      highest_bid[2] <=  'b1;    else    highest_bid[2] <=  'b0;  else highest_bid[2] <=  'b0;
-                            if(highest_bid_en[3]) if     ((bid_reg_3  > bid_reg_0 ) && (bid_reg_3  > bid_reg_1 ) && (bid_reg_3  > bid_reg_2 )  )      highest_bid[3] <=  'b1;    else    highest_bid[3] <=  'b0;  else highest_bid[3] <=  'b0;
+                            if(highest_bid_en[3]) if     ((bid_reg_3  > bid_reg_0 ) && (bid_reg_3  > bid_reg_1 ) && (bid_reg_3  > bid_reg_2 )  )      highest_bid[3] <=  'b1;    else    highest_bid[3] <=  'b0;  else highest_bid[3] <=  'b0;							
+/*                                
+                            if(highest_bid_en[0]) 
+                                if     ((bid_reg_0  > bid_reg_1 ) && (bid_reg_0  > bid_reg_2 ) && (bid_reg_0  > bid_reg_3 )  )      highest_bid[0] <=  'b1;    else    highest_bid[0] <=  'b0;  
+                            else 
+                                highest_bid[0] <=   ((bid[0]  > bid[1] ) && (bid[0]  > bid[2] ) && (bid[0]  > bid[3] )  )    ?   'b1    :      'b0;
+                                
+                                                                                            
+                            if(highest_bid_en[1]) 
+                                if     ((bid_reg_1  > bid_reg_0 ) && (bid_reg_1  > bid_reg_2 ) && (bid_reg_1  > bid_reg_3 )  )      highest_bid[1] <=  'b1;    else    highest_bid[1] <=  'b0;  
+                            else 
+                                highest_bid[1] <=   ((bid[1]  > bid[0] ) && (bid[1]  > bid[2] ) && (bid[1]  > bid[3] )  )    ?   'b1    :      'b0;
+                                                                
+                            
+                            if(highest_bid_en[2]) if     ((bid_reg_2  > bid_reg_0 ) && (bid_reg_2  > bid_reg_1 ) && (bid_reg_2  > bid_reg_3 )  )      highest_bid[2] <=  'b1;    else    highest_bid[2] <=  'b0;  
+                            else 
+                                highest_bid[2] <=   ((bid[2]  > bid[0] ) && (bid[2]  > bid[1] ) && (bid[2]  > bid[3] )  )    ?   'b1    :      'b0;
+
+                                
+                            if(highest_bid_en[3]) if     ((bid_reg_3  > bid_reg_0 ) && (bid_reg_3  > bid_reg_1 ) && (bid_reg_3  > bid_reg_2 )  )      highest_bid[3] <=  'b1;    else    highest_bid[3] <=  'b0;  
+                            else 
+                                highest_bid[3] <=   ((bid[3]  > bid[0] ) && (bid[3]  > bid[1] ) && (bid[3]  > bid[2] )  )    ?   'b1     :  'b0;
+
+*/                                
+                            
+                                
+                            
                             
 //                                                if     ((bid[1] > bid[0]) && (bid[1] > bid[2]) && (bid[1] > bid[3])  )      highest_bid[1] <= 'b1;    else    highest_bid[1] <= 'b0;      
 //                                                if     ((bid[2] > bid[0]) && (bid[2] > bid[1]) && (bid[2] > bid[3])  )      highest_bid[2] <= 'b1;    else    highest_bid[2] <= 'b0;    
@@ -311,13 +348,18 @@ always@(posedge clk or posedge rst)
             begin
                     last_serviced <=  result;                                        // flopping to store which master was last serviced 
                     
-                    count_60[0] <=  ((result[0]) | (bid[0] == 'b0) ) ? 'b0 : (count_60[0] +1);            // start counter to avoid 60 cycle no service error , start it even if no bid by master 
-                    count_60[1] <=  ((result[1]) | (bid[1] == 'b0) ) ? 'b0 : (count_60[1] +1);        
-                    count_60[2] <=  ((result[2]) | (bid[2] == 'b0) ) ? 'b0 : (count_60[2] +1);        
-                    count_60[3] <=  ((result[3]) | (bid[3] == 'b0) ) ? 'b0 : (count_60[3] +1);                        
+//                    count_60[0] <=  ((result[0]) | (bid[0] == 'b0) ) ? 'b0 : (count_60[0] +1);            // start counter to avoid 60 cycle no service error , start it even if no bid by master 
+//                    count_60[1] <=  ((result[1]) | (bid[1] == 'b0) ) ? 'b0 : (count_60[1] +1);        
+//                    count_60[2] <=  ((result[2]) | (bid[2] == 'b0) ) ? 'b0 : (count_60[2] +1);        
+//                    count_60[3] <=  ((result[3]) | (bid[3] == 'b0) ) ? 'b0 : (count_60[3] +1);                        
+
+                    count_60[0] <=  ((result[0]) | (bid_reg_0 == 'b0) ) ? 'b0 : (count_60[0] +1);            // start counter to avoid 60 cycle no service error , start it even if no bid by master 
+                    count_60[1] <=  ((result[1]) | (bid_reg_1 == 'b0) ) ? 'b0 : (count_60[1] +1);        
+                    count_60[2] <=  ((result[2]) | (bid_reg_2 == 'b0) ) ? 'b0 : (count_60[2] +1);        
+                    count_60[3] <=  ((result[3]) | (bid_reg_3 == 'b0) ) ? 'b0 : (count_60[3] +1);                                            
                     
                     serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
-                    serve_60[1] <=  (count_60[1] == 6'd58) ? 'b1 : 'b0;                     
+                    serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] ) ? 'b1 : 'b0;             // 
                     serve_60[2] <=  (count_60[2] == 6'd58) ? 'b1 : 'b0;                                     
                     serve_60[3] <=  (count_60[3] == 6'd58) ? 'b1 : 'b0;                                                         
             end
