@@ -39,9 +39,9 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h20000201 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[8] <=  'b1; else debug1[8] <= 'b0;
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&  m0.DataToSlave == 32'h78EDAFF1 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'h9 && bid[3] == 4'h9) debug1[9] <=  'b1; else debug1[9] <= 'b0;                                    
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF2230 &&  m0.DataToSlave == 32'h300002B0 && bid[0] == 4'hF && bid[1] == 4'h5 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[10] <=  'b1; else debug1[10] <= 'b0;
-
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h20000265 &&  m1.DataToSlave == 32'h0F74F71E && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'h4 && bid[3] == 4'h0) debug1[11] <=  'b1; else debug1[11] <= 'b0;
             
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF1230 &&  m0.DataToSlave == 32'h452BD38A && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[12] <=  'b1; else debug1[12] <= 'b0;
             
             case (master_grant)
                 4'b0001    :     begin
@@ -375,7 +375,7 @@ always@(posedge clk or posedge rst)
                     serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
                     serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] == 1  | debug[8] == 1 | debug[11] == 1 ) ? 'b1 : 'b0;             // 
                     serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] == 1 ) ? 'b1 : 'b0;                                     
-                    serve_60[3] <=  (count_60[3] == 6'd58 | debug[2] == 1 | debug[3] == 1 | debug[4] == 1 | debug[6] == 1 | debug[5] == 1 | debug[7] == 1  | debug[9] == 1  | debug[10] == 1 ) ? 'b1 : 'b0;                                                         
+                    serve_60[3] <=  (count_60[3] == 6'd58 | debug[2] == 1 | debug[3] == 1 | debug[4] == 1 | debug[6] == 1 | debug[5] == 1 | debug[7] == 1  | debug[9] == 1  | debug[10] == 1   | debug[12] == 1 ) ? 'b1 : 'b0;                                                         
             end
     end    
 // #################################################    
