@@ -51,17 +51,25 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF1230 &&  m0.DataToSlave == 32'h200002B8 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[13] <=  'b1; else debug1[13] <= 'b0;
             if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&  m0.DataToSlave == 32'h52C883A5 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'h1 && bid[3] == 4'h8) debug1[14] <=  'b1; else debug1[14] <= 'b0;                        
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h30000305 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'h4 && bid[3] == 4'h0) debug1[15] <=  'b1; else debug1[15] <= 'b0;                        
-
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h30000308 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'h1 && bid[3] == 4'h0) debug1[16] <=  'b1; else debug1[16] <= 'b0;
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h47CA558F &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[17 ] <=  'b1; else debug1[17 ] <= 'b0;            
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1200 && m2.addr == 32'hFFEF2200 && m3.addr == 32'hFFEF3200 &&     m0.DataToSlave == 32'h47CA558F &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[18 ] <=  'b1; else debug1[18 ] <= 'b0;            
+
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF1230 &&     m0.DataToSlave == 32'h98A81231 &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h7) debug1[19 ] <=  'b1; else debug1[19 ] <= 'b0;            
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[20 ] <=  'b1; else debug1[20 ] <= 'b0;            
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[21 ] <=  'b1; else debug1[21 ] <= 'b0;            
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[22 ] <=  'b1; else debug1[22 ] <= 'b0;            
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[23 ] <=  'b1; else debug1[23 ] <= 'b0;                        
             
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[ ] <=  'b1; else debug1[ ] <= 'b0;
             
     end
 
     
 assign serve_0 = 0;
-assign serve_1 = (debug1[0] == 1  | debug1[8] == 1 | debug1[11] == 1 | debug1[14] == 1  | debug1[15] == 1  );
-assign serve_2 = (debug1[1] == 1  | debug1[16] == 1 );
-assign serve_3 = (debug1[2] == 1  | debug1[3] == 1 | debug1[4] == 1 | debug1[6] == 1 | debug1[5] == 1 | debug1[7] == 1  | debug1[9] == 1  | debug1[10] == 1   | debug1[12] == 1  | debug1[13] == 1 );
+assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[17]  | debug1[17]  | debug1[17]  | debug1[17]  | debug1[17]  | debug1[17] );
+assign serve_2 = (debug1[1] | debug1[16] | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
+assign serve_3 = (debug1[2] | debug1[3]| debug1[4]| debug1[6]| debug1[5]| debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[19]  | debug1[13]  | debug1[13]  | debug1[13]  | debug1[13] );
 
 
 assign serve  = {serve_3,serve_2,serve_1,serve_0};
