@@ -33,18 +33,9 @@ logic serve_3 ;
 logic [3:0] serve;
 
 
-assign serve_0 = (debug1[52]);
-assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[24]  | debug1[26]  | debug1[28]  | debug1[31]    | debug1[37]  | debug1[39]| debug1[42]| debug1[44]| debug1[45]| debug1[47]| debug1[48] |
-                  debug1[50] );
-                  
-assign serve_2 = (debug1[1] | debug1[16] | debug1[34]  | debug1[35]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
 
-assign serve_3 = (debug1[2] | debug1[3] | debug1[4] | debug1[6] | debug1[5] | debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]      | debug1[25]  | debug1[27]  | debug1[29]  | debug1[30]  | debug1[32]  | debug1[33]  | debug1[36] |
-                  debug1[38]| debug1[40]| debug1[41]| debug1[43]| debug1[46]| debug1[47]| debug1[49]| debug1[51]| debug1[53]| debug1[54]| debug1[53]| debug1[55]  );
-
-
-parameter  test1 = 348710;
-parameter  test2 = 0;
+parameter  test1 = 348720;
+parameter  test2 = 349900;
 parameter  test3 = 0;
 parameter  test4 = 0;
 parameter  test5 = 0;
@@ -162,71 +153,81 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if ($time >= 334210)        debug1[53 ] =  'b0; else if($time > 334200) debug1[53 ] = 'b1; else  debug1[53 ] = 'b0;
             if ($time >= 338810)        debug1[54 ] =  'b0; else if($time > 338800) debug1[54 ] = 'b1; else  debug1[54 ] = 'b0;    
             
-            if ($time >= test1)        debug1[55 ] =  'b0; else if($time > (test1+10)) debug1[54 ] = 'b1; else  debug1[55 ] = 'b0;                          
-            if ($time >= test2)        debug1[56 ] =  'b0; else if($time > (test2 + 10)) debug1[56 ] = 'b1; else  debug1[56 ] = 'b0;
-            if ($time >= test3)        debug1[57 ] =  'b0; else if($time > (test3 + 10)) debug1[57 ] = 'b1; else  debug1[57 ] = 'b0;
-            if ($time >= test4)        debug1[58 ] =  'b0; else if($time > (test4 + 10)) debug1[58 ] = 'b1; else  debug1[58 ] = 'b0;            
-            if ($time >= test5)        debug1[59 ] =  'b0; else if($time > (test5 + 10)) debug1[59 ] = 'b1; else  debug1[59 ] = 'b0;
-            if ($time >= test6)        debug1[60 ] =  'b0; else if($time > (test6 + 10)) debug1[60 ] = 'b1; else  debug1[60 ] = 'b0;
-            if ($time >= test7)        debug1[61 ] =  'b0; else if($time > (test7 + 10)) debug1[61 ] = 'b1; else  debug1[61 ] = 'b0;
-            if ($time >= test8)        debug1[62 ] =  'b0; else if($time > (test8 + 10)) debug1[62 ] = 'b1; else  debug1[62 ] = 'b0;            
-            if ($time >= test9)        debug1[63 ] =  'b0; else if($time > (test9 + 10)) debug1[63 ] = 'b1; else  debug1[63 ] = 'b0;
-            if ($time >= test10)        debug1[64 ] =  'b0; else if($time > (test10 + 10)) debug1[64 ] = 'b1; else  debug1[64 ] = 'b0;
+            if ($time >= 348810)        debug1[55 ] =  'b0; else if($time > 348800) debug1[55 ] = 'b1; else  debug1[55 ] = 'b0;
 
-            if ($time >= test11)        debug1[65 ] =  'b0; else if($time > (test11 + 10)) debug1[65 ] = 'b1; else  debug1[65 ] = 'b0;
-            if ($time >= test12)        debug1[66 ] =  'b0; else if($time > (test12 + 10)) debug1[66 ] = 'b1; else  debug1[66 ] = 'b0;            
-            if ($time >= test13)        debug1[67 ] =  'b0; else if($time > (test13 + 10)) debug1[67 ] = 'b1; else  debug1[67 ] = 'b0;            
-            if ($time >= test14)        debug1[68 ] =  'b0; else if($time > (test14 + 10)) debug1[68 ] = 'b1; else  debug1[68 ] = 'b0;
-            if ($time >= test15)        debug1[69 ] =  'b0; else if($time > (test15 + 10)) debug1[69 ] = 'b1; else  debug1[69 ] = 'b0;            
-            if ($time >= test16)        debug1[70 ] =  'b0; else if($time > (test16 + 10)) debug1[70 ] = 'b1; else  debug1[70 ] = 'b0;            
-            if ($time >= test17)        debug1[71 ] =  'b0; else if($time > (test17 + 10)) debug1[71 ] = 'b1; else  debug1[71 ] = 'b0;            
-            if ($time >= test19)        debug1[72 ] =  'b0; else if($time > (test19 + 10)) debug1[72 ] = 'b1; else  debug1[72 ] = 'b0;            
-            if ($time >= test20)        debug1[73 ] =  'b0; else if($time > (test20 + 10)) debug1[73 ] = 'b1; else  debug1[73 ] = 'b0;            
+            if ($time >= test2+10 )         debug1[56 ] =  'b0; else if($time > (test2 ) ) debug1[56 ] = 'b1; else  debug1[56 ] = 'b0;
+            if ($time >= test3+10 )         debug1[57 ] =  'b0; else if($time > (test3 ) ) debug1[57 ] = 'b1; else  debug1[57 ] = 'b0;
+            if ($time >= test4+10 )         debug1[58 ] =  'b0; else if($time > (test4 ) ) debug1[58 ] = 'b1; else  debug1[58 ] = 'b0;            
+            if ($time >= test5+10 )         debug1[59 ] =  'b0; else if($time > (test5 ) ) debug1[59 ] = 'b1; else  debug1[59 ] = 'b0;
+            if ($time >= test6+10 )         debug1[60 ] =  'b0; else if($time > (test6 ) ) debug1[60 ] = 'b1; else  debug1[60 ] = 'b0;
+            if ($time >= test7+10 )         debug1[61 ] =  'b0; else if($time > (test7 ) ) debug1[61 ] = 'b1; else  debug1[61 ] = 'b0;
+            if ($time >= test8+10 )         debug1[62 ] =  'b0; else if($time > (test8 ) ) debug1[62 ] = 'b1; else  debug1[62 ] = 'b0;            
+            if ($time >= test9+10 )         debug1[63 ] =  'b0; else if($time > (test9 ) ) debug1[63 ] = 'b1; else  debug1[63 ] = 'b0;
+            if ($time >= test10+10)         debug1[64 ] =  'b0; else if($time > (test10 ) ) debug1[64 ] = 'b1; else  debug1[64 ] = 'b0;
 
-            if ($time >= test21)        debug1[74 ] =  'b0; else if($time > (test21 + 10)) debug1[74 ] = 'b1; else  debug1[74 ] = 'b0;            
-            if ($time >= test22)        debug1[75 ] =  'b0; else if($time > (test22 + 10)) debug1[75 ] = 'b1; else  debug1[75 ] = 'b0;            
-            if ($time >= test23)        debug1[76 ] =  'b0; else if($time > (test23 + 10)) debug1[76 ] = 'b1; else  debug1[76 ] = 'b0;            
-            if ($time >= test24)        debug1[77 ] =  'b0; else if($time > (test24 + 10)) debug1[77 ] = 'b1; else  debug1[77 ] = 'b0;            
-            if ($time >= test25)        debug1[78 ] =  'b0; else if($time > (test25 + 10)) debug1[78 ] = 'b1; else  debug1[78 ] = 'b0;            
-            if ($time >= test26)        debug1[79 ] =  'b0; else if($time > (test26 + 10)) debug1[79 ] = 'b1; else  debug1[79 ] = 'b0;            
-            if ($time >= test27)        debug1[80 ] =  'b0; else if($time > (test27 + 10)) debug1[80 ] = 'b1; else  debug1[80 ] = 'b0;            
+            if ($time >= test11+10 )        debug1[65 ] =  'b0; else if($time > (test11 ) ) debug1[65 ] = 'b1; else  debug1[65 ] = 'b0;
+            if ($time >= test12+10 )        debug1[66 ] =  'b0; else if($time > (test12 ) ) debug1[66 ] = 'b1; else  debug1[66 ] = 'b0;            
+            if ($time >= test13+10 )        debug1[67 ] =  'b0; else if($time > (test13 ) ) debug1[67 ] = 'b1; else  debug1[67 ] = 'b0;            
+            if ($time >= test14+10 )        debug1[68 ] =  'b0; else if($time > (test14 ) ) debug1[68 ] = 'b1; else  debug1[68 ] = 'b0;
+            if ($time >= test15+10 )        debug1[69 ] =  'b0; else if($time > (test15 ) ) debug1[69 ] = 'b1; else  debug1[69 ] = 'b0;            
+            if ($time >= test16+10 )        debug1[70 ] =  'b0; else if($time > (test16 ) ) debug1[70 ] = 'b1; else  debug1[70 ] = 'b0;            
+            if ($time >= test17+10 )        debug1[71 ] =  'b0; else if($time > (test17 ) ) debug1[71 ] = 'b1; else  debug1[71 ] = 'b0;            
+            if ($time >= test19+10 )        debug1[72 ] =  'b0; else if($time > (test19 ) ) debug1[72 ] = 'b1; else  debug1[72 ] = 'b0;            
+            if ($time >= test20+10 )        debug1[73 ] =  'b0; else if($time > (test20 ) ) debug1[73 ] = 'b1; else  debug1[73 ] = 'b0;            
+
+            if ($time >= test21+10 )        debug1[74 ] =  'b0; else if($time > (test21 ) ) debug1[74 ] = 'b1; else  debug1[74 ] = 'b0;            
+            if ($time >= test22+10 )        debug1[75 ] =  'b0; else if($time > (test22 ) ) debug1[75 ] = 'b1; else  debug1[75 ] = 'b0;            
+            if ($time >= test23+10 )        debug1[76 ] =  'b0; else if($time > (test23 ) ) debug1[76 ] = 'b1; else  debug1[76 ] = 'b0;            
+            if ($time >= test24+10 )        debug1[77 ] =  'b0; else if($time > (test24 ) ) debug1[77 ] = 'b1; else  debug1[77 ] = 'b0;            
+            if ($time >= test25+10 )        debug1[78 ] =  'b0; else if($time > (test25 ) ) debug1[78 ] = 'b1; else  debug1[78 ] = 'b0;            
+            if ($time >= test26+10 )        debug1[79 ] =  'b0; else if($time > (test26 ) ) debug1[79 ] = 'b1; else  debug1[79 ] = 'b0;            
+            if ($time >= test27+10 )        debug1[80 ] =  'b0; else if($time > (test27 ) ) debug1[80 ] = 'b1; else  debug1[80 ] = 'b0;            
  
-            if ($time >= test28)        debug1[81 ] =  'b0; else if($time > (test28 + 10)) debug1[81 ] = 'b1; else  debug1[81 ] = 'b0;            
-            if ($time >= test29)        debug1[82 ] =  'b0; else if($time > (test29 + 10)) debug1[82 ] = 'b1; else  debug1[82 ] = 'b0;            
-            if ($time >= test30)        debug1[83 ] =  'b0; else if($time > (test30 + 10)) debug1[83 ] = 'b1; else  debug1[83 ] = 'b0;            
-            if ($time >= test31)        debug1[84 ] =  'b0; else if($time > (test31 + 10)) debug1[84 ] = 'b1; else  debug1[84 ] = 'b0;            
-            if ($time >= test32)        debug1[85 ] =  'b0; else if($time > (test32 + 10)) debug1[85 ] = 'b1; else  debug1[85 ] = 'b0;            
-            if ($time >= test33)        debug1[86 ] =  'b0; else if($time > (test33 + 10)) debug1[86 ] = 'b1; else  debug1[86 ] = 'b0;            
-            if ($time >= test34)        debug1[87 ] =  'b0; else if($time > (test34 + 10)) debug1[87 ] = 'b1; else  debug1[87 ] = 'b0;            
-            if ($time >= test35)        debug1[88 ] =  'b0; else if($time > (test35 + 10)) debug1[88 ] = 'b1; else  debug1[88 ] = 'b0;            
-            if ($time >= test36)        debug1[89 ] =  'b0; else if($time > (test36 + 10)) debug1[89 ] = 'b1; else  debug1[89 ] = 'b0;            
-            if ($time >= test37)        debug1[90 ] =  'b0; else if($time > (test37 + 10)) debug1[90 ] = 'b1; else  debug1[90 ] = 'b0;            
+            if ($time >= test28+10 )        debug1[81 ] =  'b0; else if($time > (test28 ) ) debug1[81 ] = 'b1; else  debug1[81 ] = 'b0;            
+            if ($time >= test29+10 )        debug1[82 ] =  'b0; else if($time > (test29 ) ) debug1[82 ] = 'b1; else  debug1[82 ] = 'b0;            
+            if ($time >= test30+10 )        debug1[83 ] =  'b0; else if($time > (test30 ) ) debug1[83 ] = 'b1; else  debug1[83 ] = 'b0;            
+            if ($time >= test31+10 )        debug1[84 ] =  'b0; else if($time > (test31 ) ) debug1[84 ] = 'b1; else  debug1[84 ] = 'b0;            
+            if ($time >= test32+10 )        debug1[85 ] =  'b0; else if($time > (test32 ) ) debug1[85 ] = 'b1; else  debug1[85 ] = 'b0;            
+            if ($time >= test33+10 )        debug1[86 ] =  'b0; else if($time > (test33 ) ) debug1[86 ] = 'b1; else  debug1[86 ] = 'b0;            
+            if ($time >= test34+10 )        debug1[87 ] =  'b0; else if($time > (test34 ) ) debug1[87 ] = 'b1; else  debug1[87 ] = 'b0;            
+            if ($time >= test35+10 )        debug1[88 ] =  'b0; else if($time > (test35 ) ) debug1[88 ] = 'b1; else  debug1[88 ] = 'b0;            
+            if ($time >= test36+10 )        debug1[89 ] =  'b0; else if($time > (test36 ) ) debug1[89 ] = 'b1; else  debug1[89 ] = 'b0;            
+            if ($time >= test37+10 )        debug1[90 ] =  'b0; else if($time > (test37 ) ) debug1[90 ] = 'b1; else  debug1[90 ] = 'b0;            
 
-            if ($time >= test38)        debug1[91 ] =  'b0; else if($time > (test38 + 10)) debug1[91 ] = 'b1; else  debug1[91 ] = 'b0;            
-            if ($time >= test39)        debug1[92 ] =  'b0; else if($time > (test39 + 10)) debug1[92 ] = 'b1; else  debug1[92 ] = 'b0;            
-            if ($time >= test40)        debug1[93 ] =  'b0; else if($time > (test40 + 10)) debug1[93 ] = 'b1; else  debug1[93 ] = 'b0;            
-            if ($time >= test41)        debug1[94 ] =  'b0; else if($time > (test41 + 10)) debug1[94 ] = 'b1; else  debug1[94 ] = 'b0;            
-            if ($time >= test42)        debug1[95 ] =  'b0; else if($time > (test42 + 10)) debug1[95 ] = 'b1; else  debug1[95 ] = 'b0;            
-            if ($time >= test43)        debug1[96 ] =  'b0; else if($time > (test43 + 10)) debug1[96 ] = 'b1; else  debug1[96 ] = 'b0;            
-            if ($time >= test44)        debug1[97 ] =  'b0; else if($time > (test44 + 10)) debug1[97 ] = 'b1; else  debug1[97 ] = 'b0;            
-            if ($time >= test45)        debug1[98 ] =  'b0; else if($time > (test45 + 10)) debug1[98 ] = 'b1; else  debug1[98 ] = 'b0;            
-            if ($time >= test46)        debug1[99 ] =  'b0; else if($time > (test46 + 10)) debug1[99 ] = 'b1; else  debug1[99 ] = 'b0;            
-            if ($time >= test47)        debug1[100 ] =  'b0; else if($time > (test47 + 10)) debug1[100 ] = 'b1; else  debug1[100 ] = 'b0;            
+            if ($time >= test38+10 )        debug1[91 ] =  'b0; else if($time > (test38 ) ) debug1[91 ] = 'b1; else  debug1[91 ] = 'b0;            
+            if ($time >= test39+10 )        debug1[92 ] =  'b0; else if($time > (test39 ) ) debug1[92 ] = 'b1; else  debug1[92 ] = 'b0;            
+            if ($time >= test40+10 )        debug1[93 ] =  'b0; else if($time > (test40 ) ) debug1[93 ] = 'b1; else  debug1[93 ] = 'b0;            
+            if ($time >= test41+10 )        debug1[94 ] =  'b0; else if($time > (test41 ) ) debug1[94 ] = 'b1; else  debug1[94 ] = 'b0;            
+            if ($time >= test42+10 )        debug1[95 ] =  'b0; else if($time > (test42 ) ) debug1[95 ] = 'b1; else  debug1[95 ] = 'b0;            
+            if ($time >= test43+10 )        debug1[96 ] =  'b0; else if($time > (test43 ) ) debug1[96 ] = 'b1; else  debug1[96 ] = 'b0;            
+            if ($time >= test44+10 )        debug1[97 ] =  'b0; else if($time > (test44 ) ) debug1[97 ] = 'b1; else  debug1[97 ] = 'b0;            
+            if ($time >= test45+10 )        debug1[98 ] =  'b0; else if($time > (test45 ) ) debug1[98 ] = 'b1; else  debug1[98 ] = 'b0;            
+            if ($time >= test46+10 )        debug1[99 ] =  'b0; else if($time > (test46 ) ) debug1[99 ] = 'b1; else  debug1[99 ] = 'b0;            
+            if ($time >= test47+10 )        debug1[100 ] =  'b0; else if($time > (test47 ) ) debug1[100 ] = 'b1; else  debug1[100 ] = 'b0;            
 
-            if ($time >= test48)        debug1[101 ] =  'b0; else if($time > (test48 + 10)) debug1[101 ] = 'b1; else  debug1[101 ] = 'b0;            
-            if ($time >= test49)        debug1[102 ] =  'b0; else if($time > (test49 + 10)) debug1[102 ] = 'b1; else  debug1[102 ] = 'b0;            
-            if ($time >= test50)        debug1[103 ] =  'b0; else if($time > (test50 + 10)) debug1[103 ] = 'b1; else  debug1[103 ] = 'b0;            
-            if ($time >= test51)        debug1[104 ] =  'b0; else if($time > (test51 + 10)) debug1[104 ] = 'b1; else  debug1[104 ] = 'b0;            
-            if ($time >= test52)        debug1[105 ] =  'b0; else if($time > (test52 + 10)) debug1[105 ] = 'b1; else  debug1[105 ] = 'b0;            
-            if ($time >= test53)        debug1[106 ] =  'b0; else if($time > (test53 + 10)) debug1[106 ] = 'b1; else  debug1[106 ] = 'b0;            
-            if ($time >= test54)        debug1[107 ] =  'b0; else if($time > (test54 + 10)) debug1[107 ] = 'b1; else  debug1[107 ] = 'b0;            
-            if ($time >= test55)        debug1[108 ] =  'b0; else if($time > (test55 + 10)) debug1[108 ] = 'b1; else  debug1[108 ] = 'b0;            
-            if ($time >= test56)        debug1[109 ] =  'b0; else if($time > (test56 + 10)) debug1[109 ] = 'b1; else  debug1[109 ] = 'b0;            
-            if ($time >= test57)        debug1[110 ] =  'b0; else if($time > (test57 + 10)) debug1[110 ] = 'b1; else  debug1[110 ] = 'b0;            
+            if ($time >= test48+10 )        debug1[101 ] =  'b0; else if($time > (test48 ) ) debug1[101 ] = 'b1; else  debug1[101 ] = 'b0;            
+            if ($time >= test49+10 )        debug1[102 ] =  'b0; else if($time > (test49 ) ) debug1[102 ] = 'b1; else  debug1[102 ] = 'b0;            
+            if ($time >= test50+10 )        debug1[103 ] =  'b0; else if($time > (test50 ) ) debug1[103 ] = 'b1; else  debug1[103 ] = 'b0;            
+            if ($time >= test51+10 )        debug1[104 ] =  'b0; else if($time > (test51 ) ) debug1[104 ] = 'b1; else  debug1[104 ] = 'b0;            
+            if ($time >= test52+10 )        debug1[105 ] =  'b0; else if($time > (test52 ) ) debug1[105 ] = 'b1; else  debug1[105 ] = 'b0;            
+            if ($time >= test53+10 )        debug1[106 ] =  'b0; else if($time > (test53 ) ) debug1[106 ] = 'b1; else  debug1[106 ] = 'b0;            
+            if ($time >= test54+10 )        debug1[107 ] =  'b0; else if($time > (test54 ) ) debug1[107 ] = 'b1; else  debug1[107 ] = 'b0;            
+            if ($time >= test55+10 )        debug1[108 ] =  'b0; else if($time > (test55 ) ) debug1[108 ] = 'b1; else  debug1[108 ] = 'b0;            
+            if ($time >= test56+10 )        debug1[109 ] =  'b0; else if($time > (test56 ) ) debug1[109 ] = 'b1; else  debug1[109 ] = 'b0;            
+            if ($time >= test57+10 )        debug1[110 ] =  'b0; else if($time > (test57 ) ) debug1[110 ] = 'b1; else  debug1[110 ] = 'b0;            
             
             
 end
-    
+
+assign serve_0 = (debug1[52]);
+assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[24]  | debug1[26]  | debug1[28]  | debug1[31]    | debug1[37]  | debug1[39]| debug1[42]| debug1[44]| debug1[45]| debug1[47]| debug1[48] |
+                  debug1[50] );
+                  
+assign serve_2 = (debug1[1] | debug1[16] | debug1[34]  | debug1[35]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
+
+assign serve_3 = (debug1[2] | debug1[3] | debug1[4] | debug1[6] | debug1[5] | debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]      | debug1[25]  | debug1[27]  | debug1[29]  | debug1[30]  | debug1[32]  | debug1[33]  | debug1[36] |
+                  debug1[38]| debug1[40]| debug1[41]| debug1[43]| debug1[46]| debug1[47]| debug1[49]| debug1[51]| debug1[53]| debug1[54]| debug1[53]| debug1[55] | debug1[56]);
+
 
 
 assign serve  = {serve_3,serve_2,serve_1,serve_0};
