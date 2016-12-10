@@ -255,49 +255,49 @@ always@(*)
                                                         if (equal_bid_bit)
                                                                         casez(last_serviced)
                                                                                 Mast0     :     casez( {equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2], equal_bid[1]&valid_balance[1], equal_bid[0]&valid_balance[0]} )        // 3 2 1 0                                         
-                                                                                                    4'b0011    :    result <= Mast1 ;  
-                                                                                                    4'b0101    :    result <= Mast2 ;
-                                                                                                    4'b0111    :    result <= Mast1 ;
-                                                                                                    4'b1001    :    result <= Mast3 ;
-                                                                                                    4'b1011    :    result <= Mast1 ;
-                                                                                                    4'b1101    :    result <= Mast2 ;
-                                                                                                    4'b1111    :    result <= Mast3 ;
+                                                                                                    4'b0011    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0101    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b0111    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b1001    :    result <= Mast3 ;     // 3 2 1 0
+                                                                                                    4'b1011    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1101    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1111    :    result <= Mast3 ;     // 3 2 1 0
                                                                                                     4'b???0    :    result <= Mast1 ;    // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
                                                                                             
                                                                                 Mast1     :     casez( {equal_bid[0]&valid_balance[0], equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2], equal_bid[1]&valid_balance[1]} )        // 0 3 2 1     
-                                                                                                    4'b0011    :    result <= Mast1 ;  
-                                                                                                    4'b0101    :    result <= Mast2 ;
-                                                                                                    4'b0111    :    result <= Mast1 ;
-                                                                                                    4'b1001    :    result <= Mast3 ;
-                                                                                                    4'b1011    :    result <= Mast1 ;
-                                                                                                    4'b1101    :    result <= Mast2 ;
-                                                                                                    4'b1111    :    result <= Mast3 ;            
+                                                                                                    4'b0011    :    result <= Mast1 ;   // 0 3 2 1     
+                                                                                                    4'b0101    :    result <= Mast2 ;   // 0 3 2 1     
+                                                                                                    4'b0111    :    result <= Mast1 ;   // 0 3 2 1     
+                                                                                                    4'b1001    :    result <= Mast3 ;   // 0 3 2 1     
+                                                                                                    4'b1011    :    result <= Mast1 ;   // 0 3 2 1     
+                                                                                                    4'b1101    :    result <= Mast2 ;   // 0 3 2 1     
+                                                                                                    4'b1111    :    result <= Mast3 ;   // 0 3 2 1     
                                                                                                     4'b???0    :    result <= Mast2 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                       
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
 
                                                                                 Mast2     :     casez( {equal_bid[1]&valid_balance[1], equal_bid[0]&valid_balance[0], equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2]} )        // 1 0 3 2 
-                                                                                                    4'b0011    :    result <= Mast1 ;  
-                                                                                                    4'b0101    :    result <= Mast2 ;
-                                                                                                    4'b0111    :    result <= Mast1 ;
-                                                                                                    4'b1001    :    result <= Mast3 ;
-                                                                                                    4'b1011    :    result <= Mast1 ;
-                                                                                                    4'b1101    :    result <= Mast2 ;
-                                                                                                    4'b1111    :    result <= Mast3 ;
+                                                                                                    4'b0011    :    result <= Mast1 ;   // 1 0 3 2   
+                                                                                                    4'b0101    :    result <= Mast2 ;   // 1 0 3 2 
+                                                                                                    4'b0111    :    result <= Mast1 ;   // 1 0 3 2 
+                                                                                                    4'b1001    :    result <= Mast3 ;   // 1 0 3 2 
+                                                                                                    4'b1011    :    result <= Mast1 ;   // 1 0 3 2 
+                                                                                                    4'b1101    :    result <= Mast2 ;   // 1 0 3 2 
+                                                                                                    4'b1111    :    result <= Mast3 ;   // 1 0 3 2 
                                                                                                     4'b???0    :    result <= Mast3 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
                                                                                             
                                                                                 Mast3     :     casez( {equal_bid[2]&valid_balance[2], equal_bid[0]&valid_balance[0], equal_bid[1]&valid_balance[1], equal_bid[3]&valid_balance[3]} )        // 2 0 1 3                                         
-                                                                                                    4'b0011    :    result <= Mast1 ;  
-                                                                                                    4'b0101    :    result <= Mast2 ;
-                                                                                                    4'b0111    :    result <= Mast1 ;
-                                                                                                    4'b1001    :    result <= Mast3 ;
-                                                                                                    4'b1011    :    result <= #2 Mast1 ;
-                                                                                                    4'b1101    :    result <= Mast2 ;
-                                                                                                    4'b1111    :    result <= Mast3 ;                                                                
+                                                                                                    4'b0011    :    result <= Mast1 ;   // 2 0 1 3 
+                                                                                                    4'b0101    :    result <= Mast2 ;   // 2 0 1 3 
+                                                                                                    4'b0111    :    result <= Mast1 ;   // 2 0 1 3 
+                                                                                                    4'b1001    :    result <= Mast3 ;   // 2 0 1 3 
+                                                                                                    4'b1011    :    result <= Mast1 ;   // 2 0 1 3  // # 2 WAS HERE 
+                                                                                                    4'b1101    :    result <= Mast2 ;   // 2 0 1 3 
+                                                                                                    4'b1111    :    result <= Mast3 ;   // 2 0 1 3                                                                 
                                                                                                     4'b???0    :    result <= Mast0 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
