@@ -70,20 +70,33 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h200006B9 &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'h9 && bid[3] == 4'h9)        debug1[32 ] <=  'b1; else debug1[32 ] <= 'b0;                        
             if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'hA56E844A &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'hE && bid[3] == 4'hE)        debug1[33 ] <=  'b1; else debug1[33 ] <= 'b0;                        
             if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h4BABAD97 &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'hB && bid[3] == 4'hB)        debug1[34 ] <=  'b1; else debug1[34 ] <= 'b0;                        
-
             if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'hA54B804A &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'hF && bid[3] == 4'hF)        debug1[35 ] <=  'b1; else debug1[35 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[36 ] <=  'b1; else debug1[36 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[37 ] <=  'b1; else debug1[37 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF1230 &&     m3.DataToSlave == 32'h5B0089B6 &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'h9 && bid[3] == 4'h9)        debug1[36 ] <=  'b1; else debug1[36 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h000007FA &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0)        debug1[37 ] <=  'b1; else debug1[37 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&     m0.DataToSlave == 32'h43D20587 &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'h8 && bid[3] == 4'h8)        debug1[38 ] <=  'b1; else debug1[38 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&     m0.DataToSlave == 32'h1000085B &&       bid[0] == 4'hF   && bid[1]== 4'h1 && bid[2] == 4'h1 && bid[3] == 4'h8)        debug1[39 ] <=  'b1; else debug1[39 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h67bd4fcf &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'h8 && bid[3] == 4'h8)        debug1[40 ] <=  'b1; else debug1[40 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF2230 &&     m0.DataToSlave == 32'h000008DD &&       bid[0] == 4'hF   && bid[1]== 4'h5 && bid[2] == 4'ha && bid[3] == 4'ha)        debug1[41 ] <=  'b1; else debug1[41 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h000008E3 &&       bid[0] == 4'hF   && bid[1]== 4'h4 && bid[2] == 4'h4 && bid[3] == 4'h0)        debug1[42 ] <=  'b1; else debug1[42 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF2230 &&     m0.DataToSlave == 32'h000008F6 &&       bid[0] == 4'hF   && bid[1]== 4'h5 && bid[2] == 4'h6 && bid[3] == 4'h6)        debug1[43 ] <=  'b1; else debug1[43 ] <= 'b0;                        
 
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF3230 &&     m3.DataToSlave == 32'hAA1D6E54 &&       bid[0] == 4'hF   && bid[1]== 4'h4 && bid[2] == 4'hF && bid[3] == 4'hF)        debug1[44 ] <=  'b1; else debug1[44 ] <= 'b0;                                    
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[45 ] <=  'b1; else debug1[45 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[46 ] <=  'b1; else debug1[46 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[47 ] <=  'b1; else debug1[47 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[48 ] <=  'b1; else debug1[48 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[49 ] <=  'b1; else debug1[49 ] <= 'b0;
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[50 ] <=  'b1; else debug1[50 ] <= 'b0;                        
 
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[ ] <=  'b1; else debug1[ ] <= 'b0;
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'hF   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[51 ] <=  'b1; else debug1[51 ] <= 'b0;
             
     end
     
 assign serve_0 = 0;
-assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[24]  | debug1[26]  | debug1[28]  | debug1[31]    | debug1[28]  | debug1[28] );
+assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[24]  | debug1[26]  | debug1[28]  | debug1[31]    | debug1[37]  | debug1[39]| debug1[42]| debug1[44] );
 assign serve_2 = (debug1[1] | debug1[16] | debug1[34]  | debug1[35]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
-assign serve_3 = (debug1[2] | debug1[3]| debug1[4]| debug1[6]| debug1[5]| debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]      | debug1[25]  | debug1[27]  | debug1[29]  | debug1[30]  | debug1[32]  | debug1[33] );
+assign serve_3 = (debug1[2] | debug1[3]| debug1[4]| debug1[6]| debug1[5]| debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]      | debug1[25]  | debug1[27]  | debug1[29]  | debug1[30]  | debug1[32]  | debug1[33]  | debug1[36] |
+                  debug1[38]| debug1[40]| debug1[41]| debug1[43]  );
 
 
 assign serve  = {serve_3,serve_2,serve_1,serve_0};
@@ -253,53 +266,54 @@ always@(*)
                                                     begin
                                                         if (equal_bid_bit)
                                                                         casez(last_serviced)
-                                                                                Mast0     :     casez( {equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2], equal_bid[1]&valid_balance[1], equal_bid[0]&valid_balance[0]} )        // 3 2 1 0                                         
+                                                                                Mast0     :     casez(valid_balance)
                                                                                                     4'b0011    :    result <= Mast1 ;     // 3 2 1 0
-                                                                                                    4'b0101    :    result <= Mast2 ;     // 3 2 1 0
-                                                                                                    4'b0111    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0110    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1100    :    result <= Mast2 ;     // 3 2 1 0
                                                                                                     4'b1001    :    result <= Mast3 ;     // 3 2 1 0
-                                                                                                    4'b1011    :    result <= Mast2 ;     // 3 2 1 0
-                                                                                                    4'b1101    :    result <= Mast2 ;     // 3 2 1 0
-                                                                                                    4'b1111    :    result <= Mast3 ;     // 3 2 1 0
-                                                                                                    4'b???0    :    result <= Mast1 ;    // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
+                                                                                                    4'b1010    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0101    :    result <= Mast2 ;     // 3 2 1 0                                                                                                    
+                                                                                                    4'b1111    :    result <= Mast1 ;    // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
                                                                                             
-                                                                                Mast1     :     casez( {equal_bid[0]&valid_balance[0], equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2], equal_bid[1]&valid_balance[1]} )        // 0 3 2 1     
-                                                                                                    4'b0011    :    result <= Mast1 ;   // 0 3 2 1     
-                                                                                                    4'b0101    :    result <= Mast2 ;   // 0 3 2 1     
-                                                                                                    4'b0111    :    result <= Mast1 ;   // 0 3 2 1     
-                                                                                                    4'b1001    :    result <= Mast3 ;   // 0 3 2 1     
-                                                                                                    4'b1011    :    result <= Mast1 ;   // 0 3 2 1     
-                                                                                                    4'b1101    :    result <= Mast2 ;   // 0 3 2 1     
-                                                                                                    4'b1111    :    result <= Mast3 ;   // 0 3 2 1     
-                                                                                                    4'b???0    :    result <= Mast2 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                       
+                                                                                Mast1     :     casez(valid_balance)
+                                                                                                    4'b0011    :    result <= Mast0 ;     // 3 2 1 0
+                                                                                                    4'b0110    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1100    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1001    :    result <= Mast3 ;     // 3 2 1 0
+                                                                                                    4'b1010    :    result <= Mast3 ;     // 3 2 1 0
+                                                                                                    4'b0101    :    result <= Mast2 ;     // 3 2 1 0                                                                                                    
+                                                                                                    4'b1111    :    result <= Mast0 ;    // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
 
-                                                                                Mast2     :     casez( {equal_bid[1]&valid_balance[1], equal_bid[0]&valid_balance[0], equal_bid[3]&valid_balance[3], equal_bid[2]&valid_balance[2]} )        // 1 0 3 2 
-                                                                                                    4'b0011    :    result <= Mast1 ;   // 1 0 3 2   
-                                                                                                    4'b0101    :    result <= Mast2 ;   // 1 0 3 2 
-                                                                                                    4'b0111    :    result <= Mast1 ;   // 1 0 3 2 
-                                                                                                    4'b1001    :    result <= Mast3 ;   // 1 0 3 2 
-                                                                                                    4'b1011    :    result <= Mast1 ;   // 1 0 3 2 
-                                                                                                    4'b1101    :    result <= Mast2 ;   // 1 0 3 2 
-                                                                                                    4'b1111    :    result <= Mast3 ;   // 1 0 3 2 
-                                                                                                    4'b???0    :    result <= Mast3 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
+
+
+                                                                                Mast2     :     casez(valid_balance)
+                                                                                                    4'b0011    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0110    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b1100    :    result <= Mast3 ;     // 3 2 1 0
+                                                                                                    4'b1001    :    result <= Mast3 ;     // 3 2 1 0
+                                                                                                    4'b1010    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0101    :    result <= Mast0 ;     // 3 2 1 0                                                                                                    
+                                                                                                    4'b1111    :    result <= Mast1 ;    // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
-                                                                                            
-                                                                                Mast3     :     casez( {equal_bid[2]&valid_balance[2], equal_bid[0]&valid_balance[0], equal_bid[1]&valid_balance[1], equal_bid[3]&valid_balance[3]} )        // 2 0 1 3                                         
-                                                                                                    4'b0011    :    result <= Mast1 ;   // 2 0 1 3 
-                                                                                                    4'b0101    :    result <= Mast2 ;   // 2 0 1 3 
-                                                                                                    4'b0111    :    result <= Mast1 ;   // 2 0 1 3 
-                                                                                                    4'b1001    :    result <= Mast3 ;   // 2 0 1 3 
-                                                                                                    4'b1011    :    result <= Mast1 ;   // 2 0 1 3  // # 2 WAS HERE 
-                                                                                                    4'b1101    :    result <= Mast2 ;   // 2 0 1 3 
-                                                                                                    4'b1111    :    result <= Mast3 ;   // 2 0 1 3                                                                 
-                                                                                                    4'b???0    :    result <= Mast0 ;    // if no valid balance exists for Mast1 , Mast0 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance                                                                                                                                                                           
+
+
+                                                                                Mast3     :     casez(valid_balance)
+                                                                                                    4'b0011    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0110    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1100    :    result <= Mast2 ;     // 3 2 1 0
+                                                                                                    4'b1001    :    result <= Mast0 ;     // 3 2 1 0
+                                                                                                    4'b1010    :    result <= Mast1 ;     // 3 2 1 0
+                                                                                                    4'b0101    :    result <= Mast2 ;     // 3 2 1 0                                                                                                    
+                                                                                                    4'b1111    :    result <= Mast1 ;    // if no valid balance exists for Mast0 , Mast1 will be granted access  NOTE : WILL go in loop if all Masters finish valid balance   
                                                                                                     default    :     result <= 'b1;        // ERROR CASE 
                                                                                             endcase
+
+
                                                                                 default : result <= 4'b1111;        // ERROR CASE 
                                                                         endcase
                                                         else
