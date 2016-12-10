@@ -19,7 +19,7 @@ module arb (
 logic [3:0] master_grant; 
 logic [9:0] balance [3:0];
 logic [3:0] bid [3:0];
-logic [200:0] debug1;
+logic [200:0] debug1=0;
 
 assign {m3.grant, m2.grant, m1.grant, m0.grant}  = master_grant;
 assign {bid[3]  , bid[2]  , bid[1]  , bid[0]  }  = {m3.req, m2.req, m1.req, m0.req};
@@ -59,22 +59,22 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h100003FA &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'h3 && bid[3] == 4'h0) debug1[21 ] <=  'b1; else debug1[21 ] <= 'b0;            
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h26EAEB4D &&       bid[0] == 4'hF   && bid[1]== 4'h4 && bid[2] == 4'h4 && bid[3] == 4'h0) debug1[22 ] <=  'b1; else debug1[22 ] <= 'b0;            
             if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF3230 &&     m0.DataToSlave == 32'h0000044B &&       bid[0] == 4'hF   && bid[1]== 4'h4 && bid[2] == 4'hB && bid[3] == 4'hB) debug1[23 ] <=  'b1; else debug1[23 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'h00000000 &&     m0.DataToSlave == 32'h300004B9 &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'h3 && bid[3] == 4'h0) debug1[24 ] <=  'b1; else debug1[24 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF3230 &&     m1.DataToSlave == 32'h2870D550 &&       bid[0] == 4'hF   && bid[1]== 4'h2 && bid[2] == 4'hD && bid[3] == 4'hD) debug1[25 ] <=  'b1; else debug1[25 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&     m1.DataToSlave == 32'h60BA11C1 &&       bid[0] == 4'hF   && bid[1]== 4'h1 && bid[2] == 4'h1 && bid[3] == 4'h0)      debug1[26 ] <=  'b1; else debug1[26 ] <= 'b0;                        
 
-            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[24 ] <=  'b1; else debug1[24 ] <= 'b0;                        
-
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[25 ] <=  'b1; else debug1[25 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[26 ] <=  'b1; else debug1[26 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[27 ] <=  'b1; else debug1[27 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[28 ] <=  'b1; else debug1[28 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[29 ] <=  'b1; else debug1[29 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[30 ] <=  'b1; else debug1[30 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[31 ] <=  'b1; else debug1[31 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[32 ] <=  'b1; else debug1[32 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[33 ] <=  'b1; else debug1[33 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[34 ] <=  'b1; else debug1[34 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[35 ] <=  'b1; else debug1[35 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[36 ] <=  'b1; else debug1[36 ] <= 'b0;                        
-//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[37 ] <=  'b1; else debug1[37 ] <= 'b0;                        
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF1230 &&     m1.DataToSlave == 32'h92F76425 &&       bid[0] == 4'hF   && bid[1]== 4'h3 && bid[2] == 4'h8 && bid[3] == 4'h8)        debug1[27 ] <=  'b1; else debug1[27 ] <= 'b0;                        
+            
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[28 ] <=  'b1; else debug1[28 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[29 ] <=  'b1; else debug1[29 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[30 ] <=  'b1; else debug1[30 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[31 ] <=  'b1; else debug1[31 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[32 ] <=  'b1; else debug1[32 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[33 ] <=  'b1; else debug1[33 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[34 ] <=  'b1; else debug1[34 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[35 ] <=  'b1; else debug1[35 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[36 ] <=  'b1; else debug1[36 ] <= 'b0;                        
+//            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h)        debug1[37 ] <=  'b1; else debug1[37 ] <= 'b0;                        
 
 
 //            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&     m0.DataToSlave == 32'h30000308 &&       bid[0] == 4'h   && bid[1]== 4'h && bid[2] == 4'h && bid[3] == 4'h) debug1[ ] <=  'b1; else debug1[ ] <= 'b0;
@@ -82,9 +82,9 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
     end
     
 assign serve_0 = 0;
-assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[17]  | debug1[17]  | debug1[17] );
+assign serve_1 = (debug1[0] | debug1[8]| debug1[11]| debug1[14] | debug1[15] | debug1[17]  | debug1[19]  | debug1[21]  | debug1[22]  | debug1[24]  | debug1[26]  | debug1[17] );
 assign serve_2 = (debug1[1] | debug1[16] | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16]  | debug1[16] );
-assign serve_3 = (debug1[2] | debug1[3]| debug1[4]| debug1[6]| debug1[5]| debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]           | debug1[13]  | debug1[13]  | debug1[13] );
+assign serve_3 = (debug1[2] | debug1[3]| debug1[4]| debug1[6]| debug1[5]| debug1[7] | debug1[9] | debug1[10]  | debug1[12] | debug1[13] | debug1[20]  | debug1[23]      | debug1[25]  | debug1[27]  | debug1[13] );
 
 
 assign serve  = {serve_3,serve_2,serve_1,serve_0};
