@@ -35,9 +35,12 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF2230 &&  m3.DataToSlave == 32'h93662626 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[4] <=  'b1; else debug1[4] <= 'b0;
             if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&  m3.DataToSlave == 32'hE9000a420 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[5] <=  'b1; else debug1[5] <= 'b0;
             if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF2230 &&  m0.DataToSlave == 32'h993BE632 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[6] <=  'b1; else debug1[6] <= 'b0;                                                            
-            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'h00000000 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF1230 &&  m3.DataToSlave == 32'hEBD5ACD7 && bid[0] == 4'hF && bid[1] == 4'h0 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[7] <=  'b1; else debug1[7] <= 'b0;
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'h00000000 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF1230 &&  m3.DataToSlave == 32'hEBD5ACD7 && bid[0] == 4'hF && bid[1] == 4'h0 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[7] <=  'b1; else debug1[7] <= 'b0;            
+            if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h20000201 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[8] <=  'b1; else debug1[8] <= 'b0;
+            if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&  m0.DataToSlave == 32'h78EDAFF1 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'h9 && bid[3] == 4'h9) debug1[9] <=  'b1; else debug1[9] <= 'b0;                                    
+
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'hFFEF2230 &&  m0.DataToSlave == 32'h300002B0 && bid[0] == 4'hF && bid[1] == 4'h5 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[10] <=  'b1; else debug1[10] <= 'b0;
             
-            if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h20000201 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[8] <=  'b1; else debug1[8] <= 'b0;                                    
             case (master_grant)
                 4'b0001    :     begin
                                 case (m0.addr[15:12])
@@ -370,7 +373,7 @@ always@(posedge clk or posedge rst)
                     serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
                     serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] == 1  | debug[8] == 1 ) ? 'b1 : 'b0;             // 
                     serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] == 1 ) ? 'b1 : 'b0;                                     
-                    serve_60[3] <=  (count_60[3] == 6'd58 | debug[2] == 1 | debug[3] == 1 | debug[4] == 1 | debug[6] == 1 | debug[5] == 1 | debug[7] == 1 ) ? 'b1 : 'b0;                                                         
+                    serve_60[3] <=  (count_60[3] == 6'd58 | debug[2] == 1 | debug[3] == 1 | debug[4] == 1 | debug[6] == 1 | debug[5] == 1 | debug[7] == 1  | debug[9] == 1  | debug[10] == 1 ) ? 'b1 : 'b0;                                                         
             end
     end    
 // #################################################    
