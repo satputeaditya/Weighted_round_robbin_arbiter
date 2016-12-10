@@ -29,6 +29,8 @@ assign {bid[3]  , bid[2]  , bid[1]  , bid[0]  }  = {m3.req, m2.req, m1.req, m0.r
 always@(*)          // ADDRESS DECODING & CONNECTIONS 
         begin
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'h00000000 &&  bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[0] <=  'b1; else debug1[0] <= 'b0;
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF3230 &&  bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hE && bid[3] == 4'hE) debug1[1] <=  'b1; else debug1[1] <= 'b0;
+            
             case (master_grant)
                 4'b0001    :     begin
                                 case (m0.addr[15:12])
@@ -360,8 +362,8 @@ always@(posedge clk or posedge rst)
                     
                     serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
                     serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] ) ? 'b1 : 'b0;             // 
-                    serve_60[2] <=  (count_60[2] == 6'd58) ? 'b1 : 'b0;                                     
-                    serve_60[3] <=  (count_60[3] == 6'd58) ? 'b1 : 'b0;                                                         
+                    serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] ) ? 'b1 : 'b0;                                     
+                    serve_60[3] <=  (count_60[3] == 6'd58  ) ? 'b1 : 'b0;                                                         
             end
     end    
 // #################################################    
