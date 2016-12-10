@@ -42,8 +42,10 @@ always@(*)          // ADDRESS DECODING & CONNECTIONS
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h20000265 &&  m1.DataToSlave == 32'h0F74F71E && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'h4 && bid[3] == 4'h0) debug1[11] <=  'b1; else debug1[11] <= 'b0;            
             if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF1230 &&  m0.DataToSlave == 32'h452BD38A && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[12] <=  'b1; else debug1[12] <= 'b0;
             if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF1230 &&  m0.DataToSlave == 32'h200002B8 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[13] <=  'b1; else debug1[13] <= 'b0;
-
             if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF0230 &&  m0.DataToSlave == 32'h52C883A5 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'h1 && bid[3] == 4'h8) debug1[14] <=  'b1; else debug1[14] <= 'b0;                        
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h30000305 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'h4 && bid[3] == 4'h0) debug1[15] <=  'b1; else debug1[15] <= 'b0;                        
+
+            if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF2210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h30000308 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'h1 && bid[3] == 4'h0) debug1[16] <=  'b1; else debug1[16] <= 'b0;
             
             case (master_grant)
                 4'b0001    :     begin
@@ -335,10 +337,10 @@ always@(*)
 //                                                if     ((bid[2] > bid[0]) && (bid[2] > bid[1]) && (bid[2] > bid[3])  )      highest_bid[2] <= 'b1;    else    highest_bid[2] <= 'b0;    
 //                                                if     ((bid[3] > bid[0]) && (bid[3] > bid[1]) && (bid[3] > bid[2])  )      highest_bid[3] <= 'b1;    else    highest_bid[3] <= 'b0;  
 
-                            if     (( bid_reg_0  == bid_reg_1  ) | ( bid_reg_0  == bid_reg_2  ) | ( bid_reg_0  == bid_reg_3  )  )     equal_bid[0] <=  'b1;    else    equal_bid[0] <=  'b0; 
-                            if     (( bid_reg_1  == bid_reg_0  ) | ( bid_reg_1  == bid_reg_2  ) | ( bid_reg_1  == bid_reg_3  )  )     equal_bid[1] <=  'b1;    else    equal_bid[1] <=  'b0;  
-                            if     (( bid_reg_2  == bid_reg_0  ) | ( bid_reg_2  == bid_reg_1  ) | ( bid_reg_2  == bid_reg_3  )  )     equal_bid[2] <=  'b1;    else    equal_bid[2] <=  'b0;  
-                            if     (( bid_reg_3  == bid_reg_0  ) | ( bid_reg_3  == bid_reg_1  ) | ( bid_reg_3  == bid_reg_2  )  )     equal_bid[3] <=  'b1;    else    equal_bid[3] <=  'b0;  
+                            if     (( bid_0  == bid_1 && bid_0 !== 0  ) | ( bid_0  == bid_2   && bid_0 !== 0) | ( bid_0  == bid_3  && bid_0 !== 0)  )     equal_bid[0] <=  'b1;    else    equal_bid[0] <=  'b0; 
+                            if     (( bid_1  == bid_0 && bid_1 !== 0  ) | ( bid_1  == bid_2   && bid_1 !== 0) | ( bid_1  == bid_3  && bid_1 !== 0)  )     equal_bid[1] <=  'b1;    else    equal_bid[1] <=  'b0;  
+                            if     (( bid_2  == bid_0 && bid_2 !== 0  ) | ( bid_2  == bid_1   && bid_2 !== 0) | ( bid_2  == bid_3  && bid_2 !== 0)  )     equal_bid[2] <=  'b1;    else    equal_bid[2] <=  'b0;  
+                            if     (( bid_3  == bid_0 && bid_3 !== 0  ) | ( bid_3  == bid_1   && bid_3 !== 0) | ( bid_3  == bid_2  && bid_3 !== 0)  )     equal_bid[3] <=  'b1;    else    equal_bid[3] <=  'b0;  
                             
                             if         (balance[0] >= bid[0])  valid_balance[0] <=  'b1; 	else  valid_balance[0] <=  'b0;
                             if         (balance[1] >= bid[1])  valid_balance[1] <=  'b1; 	else  valid_balance[1] <=  'b0;
@@ -375,8 +377,8 @@ always@(posedge clk or posedge rst)
                     count_60[3] <=  ((result[3]) | (bid_reg_3 == 'b0) ) ? 'b0 : (count_60[3] +1);                                            
                     
                     serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
-                    serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] == 1  | debug[8] == 1 | debug[11] == 1 | debug[14] == 1  ) ? 'b1 : 'b0;             // 
-                    serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] == 1  ) ? 'b1 : 'b0;                                     
+                    serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] == 1  | debug[8] == 1 | debug[11] == 1 | debug[14] == 1  | debug[15] == 1  ) ? 'b1 : 'b0;             // 
+                    serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] == 1  | debug[16] == 1  ) ? 'b1 : 'b0;                                     
                     serve_60[3] <=  (count_60[3] == 6'd58 | debug[2] == 1 | debug[3] == 1 | debug[4] == 1 | debug[6] == 1 | debug[5] == 1 | debug[7] == 1  | debug[9] == 1  | debug[10] == 1   | debug[12] == 1  | debug[13] == 1 ) ? 'b1 : 'b0;                                                         
             end
     end    
