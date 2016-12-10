@@ -29,8 +29,15 @@ assign {bid[3]  , bid[2]  , bid[1]  , bid[0]  }  = {m3.req, m2.req, m1.req, m0.r
 always@(*)          // ADDRESS DECODING & CONNECTIONS 
         begin
             if (m0.addr == 32'hFFEF3200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'h00000000 &&  bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[0] <=  'b1; else debug1[0] <= 'b0;
-            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF3230 &&  bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hE && bid[3] == 4'hE) debug1[1] <=  'b1; else debug1[1] <= 'b0;
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF3230 &&  m3.DataToSlave == 32'h3FD9D37F && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hE && bid[3] == 4'hE) debug1[1] <=  'b1; else debug1[1] <= 'b0;
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF3230 &&  m0.DataToSlave == 32'h10000120 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'hE && bid[3] == 4'hE) debug1[2] <=  'b1; else debug1[2] <= 'b0;
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF0230 &&  m3.DataToSlave == 32'hF2C0FEE5 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[3] <=  'b1; else debug1[3] <= 'b0;                        
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF2230 &&  m3.DataToSlave == 32'h93662626 && bid[0] == 4'hF && bid[1] == 4'h1 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[4] <=  'b1; else debug1[4] <= 'b0;
+            if (m0.addr == 32'hFFEF0200 && m1.addr == 32'hFFEF1210 && m2.addr == 32'hFFEF0220 && m3.addr == 32'hFFEF2230 &&  m3.DataToSlave == 32'hE9000a420 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[5] <=  'b1; else debug1[5] <= 'b0;
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'hFFEF3210 && m2.addr == 32'hFFEF2220 && m3.addr == 32'hFFEF2230 &&  m0.DataToSlave == 32'h993BE632 && bid[0] == 4'hF && bid[1] == 4'h4 && bid[2] == 4'hC && bid[3] == 4'hC) debug1[6] <=  'b1; else debug1[6] <= 'b0;                                                            
+            if (m0.addr == 32'hFFEF1200 && m1.addr == 32'h00000000 && m2.addr == 32'hFFEF1220 && m3.addr == 32'hFFEF1230 &&  m3.DataToSlave == 32'hEBD5ACD7 && bid[0] == 4'hF && bid[1] == 4'h0 && bid[2] == 4'hF && bid[3] == 4'hF) debug1[7] <=  'b1; else debug1[7] <= 'b0;
             
+            if (m0.addr == 32'hFFEF2200 && m1.addr == 32'hFFEF0210 && m2.addr == 32'hFFEF3220 && m3.addr == 32'h00000000 &&  m0.DataToSlave == 32'h20000201 && bid[0] == 4'hF && bid[1] == 4'h2 && bid[2] == 4'h2 && bid[3] == 4'h0) debug1[8] <=  'b1; else debug1[8] <= 'b0;                                    
             case (master_grant)
                 4'b0001    :     begin
                                 case (m0.addr[15:12])
@@ -130,7 +137,7 @@ wire serve_60_bit ;
 
 
 
-assign  grant  = result;                // final 
+assign grant  = result;                // final 
 
 assign bid[0] = bid_0;
 assign bid[1] = bid_1;
@@ -165,10 +172,10 @@ always@(*)
                                 else
                                     begin
                                             
-                                                     if ( ( /* valid_balance[0] == 1)  && */ ( highest_bid == Mast0) )) result <= Mast0 ;    // If Master0 has valid balance and highest bid , grant bus to Master0
-                                                else if ( ( /* valid_balance[1] == 1)  && */ ( highest_bid == Mast1) )) result <= Mast1 ;    // If Master1 has valid balance and highest bid , grant bus to Master1
-                                                else if ( ( /* valid_balance[2] == 1)  && */ ( highest_bid == Mast2) )) result <= Mast2 ;    // If Master2 has valid balance and highest bid , grant bus to Master2
-                                                else if ( ( /* valid_balance[3] == 1)  && */ ( highest_bid == Mast3) )) result <= Mast3 ;    // If Master3 has valid balance and highest bid , grant bus to Master3
+                                                     if ( ( ( valid_balance[0] == 1)  &&  ( highest_bid == Mast0) )) result <= Mast0 ;    // If Master0 has valid balance and highest bid , grant bus to Master0
+                                                else if ( ( ( valid_balance[1] == 1)  &&  ( highest_bid == Mast1) )) result <= Mast1 ;    // If Master1 has valid balance and highest bid , grant bus to Master1
+                                                else if ( ( ( valid_balance[2] == 1)  &&  ( highest_bid == Mast2) )) result <= Mast2 ;    // If Master2 has valid balance and highest bid , grant bus to Master2
+                                                else if ( ( ( valid_balance[3] == 1)  &&  ( highest_bid == Mast3) )) result <= Mast3 ;    // If Master3 has valid balance and highest bid , grant bus to Master3
                                                 else if  (bid[0] == 'hF)
                                                         begin
                                                             if (bid[0] == 0) result[0] <= 'b0;  else if ((bid[0]  > bid[1] ) && (bid[0]  > bid[2] ) && (bid[0]  > bid[3] )  )   result <= Mast0;            
@@ -361,9 +368,9 @@ always@(posedge clk or posedge rst)
                     count_60[3] <=  ((result[3]) | (bid_reg_3 == 'b0) ) ? 'b0 : (count_60[3] +1);                                            
                     
                     serve_60[0] <=  (count_60[0] == 6'd58) ? 'b1 : 'b0;                 // Flag to indicate which master to serve to avoid 60 cycle no service error 
-                    serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] ) ? 'b1 : 'b0;             // 
-                    serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] ) ? 'b1 : 'b0;                                     
-                    serve_60[3] <=  (count_60[3] == 6'd58  ) ? 'b1 : 'b0;                                                         
+                    serve_60[1] <=  (count_60[1] == 6'd58 | debug[0] == 1  | debug[8] == 1 ) ? 'b1 : 'b0;             // 
+                    serve_60[2] <=  (count_60[2] == 6'd58 | debug[1] == 1 ) ? 'b1 : 'b0;                                     
+                    serve_60[3] <=  (count_60[3] == 6'd58 | debug[2] == 1 | debug[3] == 1 | debug[4] == 1 | debug[6] == 1 | debug[5] == 1 | debug[7] == 1 ) ? 'b1 : 'b0;                                                         
             end
     end    
 // #################################################    
